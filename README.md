@@ -1,6 +1,6 @@
 # Blue Coding Dev Kit
 
-Herramientas visuales oficiales para adaptar tu entorno de desarrollo al brand de **Blue Coding**. Incluye un tema completo para VS Code y un script de personalización de terminal para bash y zsh.
+Official visual tooling to adapt your development environment to the **Blue Coding** brand. Includes a complete VS Code theme and a terminal customization script for bash and zsh.
 
 ```text
   ██████╗  ██╗       ██╗   ██╗███████╗   CODING
@@ -13,123 +13,123 @@ Herramientas visuales oficiales para adaptar tu entorno de desarrollo al brand d
 
 ---
 
-## Contenido
+## Contents
 
 ```text
 blue-coding-dev-kit/
-├── CLAUDE.md                               # Contexto del proyecto para Claude Code
+├── CLAUDE.md                               # Project context for Claude Code
 ├── README.md
-├── install-all.sh                          # Instalador interactivo unificado
+├── install-all.sh                          # Interactive unified installer
 │
 ├── design-system/                          # Brand Identity Manual 2026
-│   ├── README.md                           # Guía completa de brand
-│   ├── colors_and_type.css                 # Tokens CSS oficiales (fuente de verdad)
+│   ├── README.md                           # Full brand guidelines
+│   ├── colors_and_type.css                 # Official CSS tokens (source of truth)
 │   ├── assets/
 │   │   ├── logos/                          # Logo-Colour, Logo-White, Symbol, Logotype (SVG)
-│   │   ├── icons/                          # 54 iconos Phosphor duotone (SVG)
-│   │   └── imagery/                        # 10 fotografías de marca
+│   │   ├── icons/                          # 54 Phosphor duotone icons (SVG)
+│   │   └── imagery/                        # 10 brand photography assets
 │   └── fonts/
 │       └── MavenPro-VariableFont_wght.ttf
 │
 ├── vscode-theme/
-│   ├── install.sh                          # Instalador del tema
+│   ├── install.sh                          # Theme installer
 │   └── blue-coding-dark/
-│       ├── package.json                    # Manifiesto de extensión VS Code
+│       ├── package.json                    # VS Code extension manifest
 │       └── themes/
-│           └── Blue-Coding-Dark-color-theme.json   # Tema completo (1005 tokens)
+│           └── Blue-Coding-Dark-color-theme.json   # Full theme (1005 tokens)
 │
 └── terminal/
-    ├── bc-terminal.sh                      # Script principal de tema terminal
+    ├── bc-terminal.sh                      # Terminal theme main script
     └── profiles/
-        ├── windows-terminal.json           # Perfil para Windows Terminal
-        └── iterm2-profile.json             # Perfil para iTerm2 (macOS)
+        ├── windows-terminal.json           # Windows Terminal profile
+        └── iterm2-profile.json             # iTerm2 profile (macOS)
 ```
 
 ---
 
-## Instalación rápida
+## Quick install
 
 ```bash
-# Instala ambas herramientas de forma interactiva
+# Install both tools interactively
 bash ~/blue-coding-dev-kit/install-all.sh
 ```
 
-O instala cada herramienta por separado:
+Or install each tool separately:
 
 ```bash
-# Solo el tema de VS Code
+# VS Code theme only
 bash ~/blue-coding-dev-kit/vscode-theme/install.sh
 
-# Solo el tema de terminal
+# Terminal theme only
 bash ~/blue-coding-dev-kit/terminal/bc-terminal.sh
 ```
 
 ---
 
-## 1. Tema VS Code — Blue Coding Dark
+## 1. VS Code Theme — Blue Coding Dark
 
-Un tema oscuro completo construido desde la paleta oficial de Blue Coding. Cubre sintaxis de más de 10 lenguajes, toda la UI del editor, terminal integrada, Git, debugger y paneles.
+A complete dark theme built from the official Blue Coding palette. Covers syntax for 10+ languages, the full editor UI, integrated terminal, Git, debugger, and panels.
 
-### Instalación
+### Installation
 
-#### Opción A — Script automático (recomendado)
+#### Option A — Automatic script (recommended)
 
 ```bash
 bash ~/blue-coding-dev-kit/vscode-theme/install.sh
 ```
 
-El script detecta el CLI de VS Code y copia la extensión al directorio de extensiones del usuario. Si no encuentra el CLI, imprime las instrucciones manuales.
+The script detects the VS Code CLI and copies the extension to the user extensions directory. If the CLI is not found, it prints manual installation instructions.
 
-#### Opción B — Manual
+#### Option B — Manual
 
-1. Abrir VS Code
+1. Open VS Code
 2. `Ctrl+Shift+P` → `Developer: Install Extension from Location`
-3. Seleccionar la carpeta `vscode-theme/blue-coding-dark/`
-4. Reiniciar VS Code
+3. Select the folder `vscode-theme/blue-coding-dark/`
+4. Restart VS Code
 
-#### Activar el tema
+#### Activate the theme
 
 ```text
 Ctrl+K  Ctrl+T   →   Blue Coding Dark
 ```
 
-O desde el menú: `File → Preferences → Color Theme → Blue Coding Dark`
+Or from the menu: `File → Preferences → Color Theme → Blue Coding Dark`
 
-### Paleta de colores
+### Color palette
 
-| Elemento UI | Color | Hex |
+| UI Element | Color | Hex |
 | --- | --- | --- |
-| Background editor | Prussian Navy | `#0C1828` |
-| Background sidebar | Deep Navy | `#091220` |
-| Background activity bar | Deepest Navy | `#060D18` |
+| Editor background | Prussian Navy | `#0C1828` |
+| Sidebar background | Deep Navy | `#091220` |
+| Activity bar background | Deepest Navy | `#060D18` |
 | Status bar | Baltic Blue | `#01638E` |
 | Cursor | Ocean Blue | `#0091CE` |
-| Selección | Blue Bell 20% | `#1F96DB30` |
+| Selection | Blue Bell 20% | `#1F96DB30` |
 
-| Token de sintaxis | Color | Hex |
+| Syntax token | Color | Hex |
 | --- | --- | --- |
 | Keywords — `if` / `for` / `return` | Ocean Blue | `#0091CE` |
 | Storage — `const` / `class` / `function` | Blue Bell | `#1F96DB` |
-| Nombres de función / método | Light Blue | `#7AB8E8` |
-| Tipos / interfaces / clases | Blue Bell | `#1F96DB` |
+| Function / method names | Light Blue | `#7AB8E8` |
+| Types / interfaces / classes | Blue Bell | `#1F96DB` |
 | Strings | Success Green | `#2BA77A` |
-| Números / booleans / null | Warning Yellow | `#E0A93B` |
-| Comentarios | Muted Blue | `#3E5C76` italic |
-| Variables y parámetros | Ice Blue | `#C8DEFF` / `#A8C8F0` |
-| Propiedades de objeto | Soft Blue | `#7AB8E8` |
-| Decoradores / anotaciones | Sapphire Light | `#7BA7ED` |
-| Errores / inválido | Error Red | `#D94A4A` |
+| Numbers / booleans / null | Warning Yellow | `#E0A93B` |
+| Comments | Muted Blue | `#3E5C76` italic |
+| Variables and parameters | Ice Blue | `#C8DEFF` / `#A8C8F0` |
+| Object properties | Soft Blue | `#7AB8E8` |
+| Decorators / annotations | Sapphire Light | `#7BA7ED` |
+| Errors / invalid | Error Red | `#D94A4A` |
 | `this` / `self` / `super` | Ocean Blue italic | `#0091CE` |
 
-### Lenguajes cubiertos
+### Supported languages
 
 JavaScript · TypeScript · JSX · TSX · Python · Go · Rust · HTML · CSS / SCSS · JSON · YAML · TOML · Markdown · Shell · Regex
 
-### Colores de terminal integrada
+### Integrated terminal colors
 
-El tema también configura la paleta de 16 colores ANSI de la terminal integrada de VS Code:
+The theme also configures the 16-color ANSI palette of the VS Code integrated terminal:
 
-| ANSI | Nombre BC | Hex |
+| ANSI | BC Name | Hex |
 | --- | --- | --- |
 | Black | Prussian Blue | `#101C32` |
 | Blue | Baltic Blue | `#01638E` |
@@ -147,29 +147,29 @@ El tema también configura la paleta de 16 colores ANSI de la terminal integrada
 
 ## 2. Terminal — Blue Coding Theme
 
-Script para bash y zsh que aplica la identidad visual de Blue Coding a la consola: paleta de colores, prompt de dos líneas con indicador de marca, colores de `ls`, `grep` y shortcuts de Git.
+A script for bash and zsh that applies the Blue Coding visual identity to the console: color palette, two-line branded prompt, `ls` and `grep` colors, and Git shortcuts.
 
-### Activar en la sesión actual
+### Activate in the current session
 
 ```bash
 source ~/blue-coding-dev-kit/terminal/bc-terminal.sh
 ```
 
-### Instalar permanentemente (añadir a `.bashrc` / `.zshrc`)
+### Install permanently (add to `.bashrc` / `.zshrc`)
 
 ```bash
 bash ~/blue-coding-dev-kit/terminal/bc-terminal.sh
 ```
 
-El script detecta el shell activo, muestra el banner de Blue Coding y ofrece añadir la línea `source` al archivo de configuración correspondiente.
+The script detects the active shell, shows the Blue Coding banner, and offers to append the `source` line to the corresponding config file.
 
-### Qué incluye
+### What it includes
 
-#### Paleta ANSI (16 colores del sistema)
+#### ANSI palette (16 system colors)
 
-Reemplaza los colores estándar del terminal usando secuencias OSC4. Compatible con la mayoría de emuladores modernos (Windows Terminal, iTerm2, GNOME Terminal, Kitty, Alacritty).
+Replaces the terminal's standard colors using OSC4 sequences. Compatible with most modern emulators (Windows Terminal, iTerm2, GNOME Terminal, Kitty, Alacritty).
 
-| Slot ANSI | Color BC | Hex |
+| ANSI slot | BC color | Hex |
 | --- | --- | --- |
 | Black | Prussian Blue | `#101C32` |
 | Blue | Baltic Blue | `#01638E` |
@@ -179,177 +179,177 @@ Reemplaza los colores estándar del terminal usando secuencias OSC4. Compatible 
 | Green | Success | `#2BA77A` |
 | Yellow | Warning | `#E0A93B` |
 | Red | Error | `#D94A4A` |
-| Fondo | Deep Navy | `#091220` |
+| Background | Deep Navy | `#091220` |
 | Cursor | Ocean Blue | `#0091CE` |
 
 #### Prompt
 
 ```text
-╭─[BC] user@host  ~/ruta/actual  main*
+╭─[BC] user@host  ~/current/path  main*
 ╰─❯ _
 ```
 
-| Segmento | Color |
+| Segment | Color |
 | --- | --- |
 | `[BC]` | Baltic Blue |
-| usuario | Ocean Blue |
+| user | Ocean Blue |
 | `@host` | Light Cyan |
-| ruta | Alice Blue |
-| rama git | Blue Bell (con `*` si hay cambios) |
+| path | Alice Blue |
+| git branch | Blue Bell (with `*` if dirty) |
 | `╰─❯` | Ocean Blue |
 
-El prompt se actualiza dinámicamente en cada comando. En zsh también muestra la hora en el lado derecho.
+The prompt updates dynamically on every command. In zsh, the current time is also shown on the right side.
 
 #### LS_COLORS
 
-Colores diferenciados por tipo de archivo:
+Differentiated colors by file type:
 
-| Tipo | Color |
+| Type | Color |
 | --- | --- |
-| Directorios | Blue Bell bold |
-| Links simbólicos | Light Cyan |
-| Ejecutables | Success Green |
-| Archivos `.ts` / `.py` / `.go` | Blue Bell / Light Cyan |
-| Archivos `.json` / `.yaml` | Warning Yellow |
-| Archivos `.html` / `.css` | Soft Blue |
-| Archivos comprimidos | Error Red |
-| Archivos `.md` / `.txt` | Ice Blue |
+| Directories | Blue Bell bold |
+| Symlinks | Light Cyan |
+| Executables | Success Green |
+| `.ts` / `.py` / `.go` files | Blue Bell / Light Cyan |
+| `.json` / `.yaml` files | Warning Yellow |
+| `.html` / `.css` files | Soft Blue |
+| Compressed archives | Error Red |
+| `.md` / `.txt` files | Ice Blue |
 | Logs / locks | Muted |
 
 #### GREP_COLORS
 
-Coincidencias resaltadas en Ocean Blue bold sobre el fondo del terminal.
+Matches highlighted in Ocean Blue bold over the terminal background.
 
-#### Aliases de Git
+#### Git aliases
 
-| Alias | Comando |
+| Alias | Command |
 | --- | --- |
 | `gs` | `git status -sb` |
 | `gd` | `git diff` |
 | `gl` | `git log --oneline --graph --color` |
 | `gb` | `git branch -a` |
 
-#### Aliases de listado
+#### Listing aliases
 
-| Alias | Comando |
+| Alias | Command |
 | --- | --- |
 | `ls` | `ls --color=auto` |
 | `ll` | `ls -lh` |
 | `la` | `ls -lha` |
 
-### Compatibilidad de color
+### Color compatibility
 
-El script detecta automáticamente el modo de color soportado:
+The script automatically detects the supported color mode:
 
-| Terminal | Modo | Comportamiento |
+| Terminal | Mode | Behavior |
 | --- | --- | --- |
-| Windows Terminal | True-color (24-bit) | Paleta exacta BC |
-| iTerm2 | True-color (24-bit) | Paleta exacta BC |
-| VS Code terminal | True-color (24-bit) | Paleta exacta BC |
-| GNOME Terminal | True-color (24-bit) | Paleta exacta BC |
-| Terminal.app (macOS) | 256 colores | Aproximación 256-color |
-| TTY / SSH básico | 256 colores | Aproximación 256-color |
+| Windows Terminal | True-color (24-bit) | Exact BC palette |
+| iTerm2 | True-color (24-bit) | Exact BC palette |
+| VS Code terminal | True-color (24-bit) | Exact BC palette |
+| GNOME Terminal | True-color (24-bit) | Exact BC palette |
+| Terminal.app (macOS) | 256 colors | 256-color approximation |
+| TTY / basic SSH | 256 colors | 256-color approximation |
 
-Para forzar un modo específico:
+To force a specific mode:
 
 ```bash
-COLORTERM=truecolor source ~/blue-coding-dev-kit/terminal/bc-terminal.sh  # forzar 24-bit
-COLORTERM=""         source ~/blue-coding-dev-kit/terminal/bc-terminal.sh  # forzar 256-color
+COLORTERM=truecolor source ~/blue-coding-dev-kit/terminal/bc-terminal.sh  # force 24-bit
+COLORTERM=""         source ~/blue-coding-dev-kit/terminal/bc-terminal.sh  # force 256-color
 ```
 
 ---
 
-## 3. Perfiles de terminal adicionales
+## 3. Additional terminal profiles
 
 ### Windows Terminal
 
-Copia el contenido de `terminal/profiles/windows-terminal.json` en tu configuración de Windows Terminal:
+Copy the content of `terminal/profiles/windows-terminal.json` into your Windows Terminal settings:
 
-1. Abrir Windows Terminal → `Ctrl+,` (Settings)
-2. Click en **"Open JSON file"** (esquina inferior izquierda)
-3. Añadir el objeto del perfil dentro del array `"profiles.list"`
-4. Guardar — el perfil **Blue Coding Dark** aparece en el menú de nueva pestaña
+1. Open Windows Terminal → `Ctrl+,` (Settings)
+2. Click **"Open JSON file"** (bottom-left corner)
+3. Add the profile object inside the `"profiles.list"` array
+4. Save — the **Blue Coding Dark** profile appears in the new tab menu
 
-El perfil incluye:
+The profile includes:
 
-- Paleta completa de 16 colores BC
-- Fondo `#091220`, cursor `#0091CE`
-- Fuente: Cascadia Code 12px
-- Efecto acrílico con 90% de opacidad
+- Full 16-color BC palette
+- Background `#091220`, cursor `#0091CE`
+- Font: Cascadia Code 12px
+- Acrylic effect at 90% opacity
 - Tab color: Baltic Blue (`#01638E`)
 
 ### iTerm2 (macOS)
 
-1. Abrir iTerm2 → `Preferences` → `Profiles`
-2. Click en **"Other Actions…"** → **"Import JSON Profiles…"**
-3. Seleccionar `terminal/profiles/iterm2-profile.json`
-4. El perfil **Blue Coding Dark** queda disponible
+1. Open iTerm2 → `Preferences` → `Profiles`
+2. Click **"Other Actions…"** → **"Import JSON Profiles…"**
+3. Select `terminal/profiles/iterm2-profile.json`
+4. The **Blue Coding Dark** profile is now available
 
 ---
 
-## Paleta de referencia
+## Color reference
 
-Colores base del Brand Identity Manual 2026 de Blue Coding:
+Base colors from the Blue Coding Brand Identity Manual 2026:
 
-| Nombre | Hex | Uso principal |
+| Name | Hex | Primary use |
 | --- | --- | --- |
-| Baltic Blue | `#01638E` | Logo marca izquierda, status bar, títulos H1/H3 |
-| Ocean Blue | `#0091CE` | Logo marca derecha, acentos, keywords, cursor |
-| Blue Bell | `#1F96DB` | Gradiente inicio, tipos, clases |
-| Sapphire Sky | `#3771D6` | Gradiente fin, decoradores |
-| Prussian Blue | `#101C32` | Texto primario, fondos oscuros |
-| Alice Blue | `#F5FAFF` | Fondo de página, texto sobre oscuro |
-| Lavender | `#D7E4F9` | Fondos suaves, bordes |
-| Success | `#2BA77A` | Estados positivos, strings |
-| Warning | `#E0A93B` | Advertencias, números |
-| Error | `#D94A4A` | Errores, código inválido |
+| Baltic Blue | `#01638E` | Left logo mark, status bar, H1/H3 headings |
+| Ocean Blue | `#0091CE` | Right logo mark, accents, keywords, cursor |
+| Blue Bell | `#1F96DB` | Gradient start, types, classes |
+| Sapphire Sky | `#3771D6` | Gradient end, decorators |
+| Prussian Blue | `#101C32` | Primary text, dark backgrounds |
+| Alice Blue | `#F5FAFF` | Page background, text on dark |
+| Lavender | `#D7E4F9` | Soft backgrounds, borders |
+| Success | `#2BA77A` | Positive states, strings |
+| Warning | `#E0A93B` | Warnings, numbers |
+| Error | `#D94A4A` | Errors, invalid code |
 
 ---
 
-## Requisitos
+## Requirements
 
 ### VS Code
 
-- VS Code 1.60 o superior (o VS Code Insiders / VSCodium)
-- El CLI `code` en el PATH para instalación automática
+- VS Code 1.60 or higher (or VS Code Insiders / VSCodium)
+- The `code` CLI in PATH for automatic installation
 
 ### Terminal
 
-- bash 4.0+ o zsh 5.0+
-- Terminal con soporte de colores ANSI (prácticamente cualquier terminal moderno)
-- True-color opcional pero recomendado: Windows Terminal, iTerm2, Kitty, Alacritty, GNOME Terminal 3.28+
+- bash 4.0+ or zsh 5.0+
+- Terminal with ANSI color support (virtually any modern terminal)
+- True-color optional but recommended: Windows Terminal, iTerm2, Kitty, Alacritty, GNOME Terminal 3.28+
 
 ---
 
-## Desinstalación
+## Uninstall
 
-### Desinstalar el tema VS Code
+### Uninstall the VS Code theme
 
 ```bash
-# Eliminar la extensión instalada
+# Remove the installed extension
 rm -rf ~/.vscode/extensions/blue-coding.blue-coding-dark-*
 ```
 
-O desde VS Code: `Extensions` → buscar **Blue Coding Dark** → Uninstall
+Or from VS Code: `Extensions` → search **Blue Coding Dark** → Uninstall
 
-### Desinstalar el script de terminal
+### Uninstall the terminal script
 
-Eliminar la línea añadida en `~/.bashrc` o `~/.zshrc`:
+Remove the line added to `~/.bashrc` or `~/.zshrc`:
 
 ```bash
-# Editar el archivo de configuración
-nano ~/.bashrc   # o ~/.zshrc
+# Edit the config file
+nano ~/.bashrc   # or ~/.zshrc
 
-# Buscar y eliminar la línea:
-# source "/ruta/a/blue-coding-dev-kit/terminal/bc-terminal.sh"
+# Find and delete the line:
+# source "/path/to/blue-coding-dev-kit/terminal/bc-terminal.sh"
 ```
 
 ---
 
-## Créditos
+## Credits
 
-Desarrollado con base en el **Blue Coding Brand Identity Manual 2026**.
+Built from the **Blue Coding Brand Identity Manual 2026**.
 
-- Empresa: [Blue Coding](https://bluecoding.com) — Nearshore Software Development
-- Fundada: 2014
-- Servicios: Staff augmentation · Dedicated AI pods · Forward-deployed engineers
+- Company: [Blue Coding](https://bluecoding.com) — Nearshore Software Development
+- Founded: 2014
+- Services: Staff augmentation · Dedicated AI pods · Forward-deployed engineers

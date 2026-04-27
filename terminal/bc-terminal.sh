@@ -97,11 +97,12 @@ _bc_banner() {
   local M="$BC_MUTED"
   local R="$BC_RESET"
 
-  local _user _host _ip
+  local _user _host _ip _date
   _user="$(id -un)"
   _host="$(hostname -s 2>/dev/null || echo '?')"
   _ip="$(hostname -I 2>/dev/null | awk '{print $1}')"
   [[ -z "$_ip" ]] && _ip="$(ipconfig getifaddr en0 2>/dev/null || echo '?.?.?.?')"
+  _date="$(LC_TIME=en_US.UTF-8 date '+%A, %B %d, %Y' 2>/dev/null || LANG=C date '+%A, %B %d, %Y')"
 
   printf "\n"
   printf "  ${B}██████╗ ${O}██╗      ██╗   ██╗███████╗${R}  ${W}CODING${R}\n"
@@ -111,8 +112,8 @@ _bc_banner() {
   printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R}  ${O}${_user}${M}@${C}${_host}${R}\n"
   printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R}  ${M}${_ip}${R}\n"
   printf "\n"
-  printf "  ${M}true-color:${R} %s\n" \
-    "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && printf "${O}yes${R}" || printf "${M}no (256-color fallback)${R}" )"
+  printf "  ${C}${_date}${R}  ${M}·  %s${R}\n" \
+    "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && printf "true-color" || printf "256-color" )"
   printf "\n"
 }
 
@@ -181,7 +182,7 @@ _bc_set_aliases() {
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 
-  # git shortcuts styled for quick feedback
+  # git shortcuts
   alias gs='git status -sb'
   alias gd='git diff'
   alias gl='git log --oneline --graph --color'
@@ -245,12 +246,13 @@ _bc_install() {
 }
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
-# When sourced → apply theme silently (no banner)
-# When executed directly → show banner + offer install
+# When sourced → apply theme + show banner (every new terminal session)
+# When executed directly → apply theme + show banner + offer install
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   _bc_apply_theme
   _bc_banner
   _bc_install
 else
   _bc_apply_theme
+  _bc_banner
 fi

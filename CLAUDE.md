@@ -39,8 +39,9 @@ The official Blue Coding Brand Identity Manual 2026 guidelines are embedded in t
 
 ## Rules for any new visual work
 
-- Always match the token names from `colors_and_type.css` exactly
+- Always match the token names from `design-system/colors_and_type.css` exactly
 - Never invent colors outside the brand palette
 - Use sentence case for all labels and headings
 - Logos: use `Symbol-Colour.svg` on light backgrounds, `Symbol-White.svg` on dark
 - Icons: always Phosphor duotone style at 20px minimum
+- All user-facing text must be in English

@@ -21,7 +21,7 @@ printf "  ${B}${BOLD}██████╔╝${O}███████╗ ╚█
 printf "  ${B}${BOLD}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${RST}\n"
 printf "\n"
 printf "  ${M}What would you like to install?${RST}\n\n"
-printf "  ${O}1${RST}  VSCode theme\n"
+printf "  ${O}1${RST}  VS Code theme\n"
 printf "  ${O}2${RST}  Terminal theme (bash/zsh prompt + colors)\n"
 printf "  ${O}3${RST}  Both\n\n"
 printf "  ${W}Choice [1/2/3]:${RST} "

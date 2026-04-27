@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
-# Installs the Blue Coding Dark VSCode theme
+# Installs the Blue Coding Dark VS Code theme
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 THEME_DIR="${SCRIPT_DIR}/blue-coding-dark"
 
-# True-color output helpers
 O='\033[38;2;0;145;206m'
 B='\033[38;2;1;99;142m'
 G='\033[38;2;43;167;122m'
 Y='\033[38;2;224;169;59m'
-R='\033[38;2;217;74;74m'
 W='\033[38;2;200;222;255m'
 M='\033[38;2;74;108;132m'
 BOLD='\033[1m'
@@ -20,7 +18,7 @@ RST='\033[0m'
 banner() {
   printf "\n"
   printf "  ${B}${BOLD}██████╗ ${O}██╗      ██╗   ██╗███████╗${RST}  ${W}${BOLD}CODING${RST}\n"
-  printf "  ${B}${BOLD}██╔══██╗${O}██║      ██║   ██║██╔════╝${RST}  ${M}VSCode Theme Installer${RST}\n"
+  printf "  ${B}${BOLD}██╔══██╗${O}██║      ██║   ██║██╔════╝${RST}  ${M}VS Code Theme Installer${RST}\n"
   printf "  ${B}${BOLD}██████╔╝${O}██║      ██║   ██║█████╗  ${RST}\n"
   printf "  ${B}${BOLD}██╔══██╗${O}██║      ██║   ██║██╔══╝  ${RST}\n"
   printf "  ${B}${BOLD}██████╔╝${O}███████╗ ╚██████╔╝███████╗${RST}\n"
@@ -60,14 +58,13 @@ if command -v vsce &>/dev/null; then
     printf "\n${G}Theme installed via VSIX!${RST}\n" && exit 0
 fi
 
-# ─── Direct folder install (development install) ─────────────────────────────
+# ─── Direct folder install ────────────────────────────────────────────────────
 EXT_DIR=""
 if [[ "$(uname)" == "Darwin" ]]; then
   EXT_DIR="${HOME}/.vscode/extensions"
 elif [[ "$(uname)" == "Linux" ]]; then
   EXT_DIR="${HOME}/.vscode/extensions"
 else
-  # Windows / WSL
   WIN_APPDATA="${APPDATA:-/mnt/c/Users/$(whoami)/AppData/Roaming}"
   EXT_DIR="${WIN_APPDATA}/Code/User/extensions"
   [[ ! -d "${EXT_DIR}" ]] && EXT_DIR="${HOME}/.vscode/extensions"
