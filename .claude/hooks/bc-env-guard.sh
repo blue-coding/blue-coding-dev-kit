@@ -26,8 +26,11 @@ fi
 
 if [ "$TOOL" = "Bash" ]; then
   CMD="$(printf '%s' "$INPUT" | jq -r '.tool_input.command // ""')"
-  # Detect .env file references in shell commands (e.g. cat .env, head /path/.env.local)
-  if printf '%s' "$CMD" | grep -qE '(^|[[:space:]/])([^[:space:]]*)\.env([[:space:]]|$|\.)'; then
+  # Block file-reading commands that target a .env file.
+  # Only matches when a known read-access command precedes the .env path,
+  # avoiding false positives in git commit messages, echo, comments, etc.
+  if printf '%s' "$CMD" | grep -qE \
+    '(^|[;&|[:space:]])(cat|head|tail|less|more|source|\.|cp|mv|nano|vim|vi|code|bat)\s+[^;&|]*\.env([[:space:]]|$|\.)'; then
     deny
     exit 0
   fi
