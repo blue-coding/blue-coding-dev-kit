@@ -97,16 +97,22 @@ _bc_banner() {
   local M="$BC_MUTED"
   local R="$BC_RESET"
 
+  local _user _host _ip
+  _user="$(id -un)"
+  _host="$(hostname -s 2>/dev/null || echo '?')"
+  _ip="$(hostname -I 2>/dev/null | awk '{print $1}')"
+  [[ -z "$_ip" ]] && _ip="$(ipconfig getifaddr en0 2>/dev/null || echo '?.?.?.?')"
+
   printf "\n"
   printf "  ${B}██████╗ ${O}██╗      ██╗   ██╗███████╗${R}  ${W}CODING${R}\n"
   printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔════╝${R}  ${M}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${R}\n"
   printf "  ${B}██████╔╝${O}██║      ██║   ██║█████╗  ${R}  ${C}Nearshore Software Development${R}\n"
   printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔══╝  ${R}  ${M}bluecoding.com${R}\n"
-  printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R}\n"
-  printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R}\n"
+  printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R}  ${O}${_user}${M}@${C}${_host}${R}\n"
+  printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R}  ${M}${_ip}${R}\n"
   printf "\n"
-  printf "  ${M}Terminal theme loaded${R}  ${B}|${R}${O}  True-color: %s${R}\n" \
-    "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && echo 'yes' || echo 'no (256-color fallback)' )"
+  printf "  ${M}true-color:${R} %s\n" \
+    "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && printf "${O}yes${R}" || printf "${M}no (256-color fallback)${R}" )"
   printf "\n"
 }
 

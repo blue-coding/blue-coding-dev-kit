@@ -1,0 +1,327 @@
+/*
+ * Blue Coding Design System — Colors & Typography
+ * Source of truth for all brand tokens.
+ * Fonts: Poppins (display/headings) + Maven Pro (body/UI) via Google Fonts
+ */
+
+/* Poppins — display/headings (Google Fonts, no local file provided) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Maven Pro — body/UI (local variable font) */
+@font-face {
+  font-family: 'Maven Pro';
+  src: url('fonts/MavenPro-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   COLOR TOKENS
+   ============================================================ */
+:root {
+  /* --- Primary --- */
+  --color-baltic-blue:    #01638E;  /* logo left, main brand */
+  --color-ocean-blue:     #0091CE;  /* logo right, titles, accents */
+
+  /* --- Secondary --- */
+  --color-blue-bell:      #1F96DB;  /* UI, gradients, gradient start */
+  --color-sapphire-sky:   #3771D6;  /* UI, gradients, gradient end */
+  --color-lavender:       #D7E4F9;  /* soft backgrounds, subtle UI */
+
+  /* --- Neutral --- */
+  --color-prussian-blue:  #101C32;  /* primary text, dark backgrounds */
+  --color-alice-blue:     #F5FAFF;  /* default page background */
+  --color-charcoal:       #545454;  /* body text, secondary, dividers */
+
+  /* --- Status --- */
+  --color-success:        #2BA77A;
+  --color-warning:        #E0A93B;
+  --color-error:          #D94A4A;
+  --color-info:           #0091CE;  /* reuses Ocean Blue */
+
+  /* --- Title Gradient (last-word accent on display headings) --- */
+  --gradient-title: linear-gradient(135deg, #1F96DB 0%, #3771D6 100%);
+  --gradient-title-fallback: #1F96DB;  /* solid fallback */
+
+  /* --- Dual-color divider (Baltic Blue + Ocean Blue) --- */
+  --divider-color-1: #01638E;
+  --divider-color-2: #0091CE;
+
+  /* ============================================================
+     SEMANTIC COLOR ALIASES
+     ============================================================ */
+  --fg-primary:     var(--color-prussian-blue);
+  --fg-secondary:   var(--color-charcoal);
+  --fg-accent:      var(--color-ocean-blue);
+  --fg-on-dark:     #FFFFFF;
+
+  --bg-page:        var(--color-alice-blue);
+  --bg-dark:        var(--color-prussian-blue);
+  --bg-subtle:      var(--color-lavender);
+  --bg-card:        #FFFFFF;
+
+  --border-default: var(--color-lavender);
+  --border-strong:  var(--color-ocean-blue);
+}
+
+/* ============================================================
+   TYPOGRAPHY TOKENS
+   ============================================================ */
+:root {
+  /* --- Font families --- */
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Maven Pro', sans-serif;
+
+  /* --- Display scale (Poppins) --- */
+  --text-display-xl-size:   72px;
+  --text-display-xl-weight: 700;
+  --text-display-xl-lh:     1.1;
+
+  --text-display-lg-size:   56px;
+  --text-display-lg-weight: 700;
+  --text-display-lg-lh:     1.15;
+
+  --text-display-md-size:   40px;
+  --text-display-md-weight: 600;
+  --text-display-md-lh:     1.2;
+
+  /* --- Heading scale (Poppins) --- */
+  --text-h1-size:   32px;
+  --text-h1-weight: 700;
+  --text-h1-lh:     1.25;
+
+  --text-h2-size:   26px;
+  --text-h2-weight: 600;
+  --text-h2-lh:     1.3;
+
+  --text-h3-size:   22px;
+  --text-h3-weight: 600;
+  --text-h3-lh:     1.35;
+
+  --text-h4-size:   18px;
+  --text-h4-weight: 600;
+  --text-h4-lh:     1.4;
+
+  /* --- Body scale (Maven Pro) --- */
+  --text-body-lg-size:   18px;
+  --text-body-lg-weight: 400;
+  --text-body-lg-lh:     1.65;
+
+  --text-body-size:   16px;
+  --text-body-weight: 400;
+  --text-body-lh:     1.65;
+
+  --text-body-sm-size:   14px;
+  --text-body-sm-weight: 400;
+  --text-body-sm-lh:     1.6;
+
+  /* --- UI / Label scale (Maven Pro) --- */
+  --text-subtitle-size:   20px;
+  --text-subtitle-weight: 500;
+  --text-subtitle-lh:     1.4;
+
+  --text-label-size:      13px;
+  --text-label-weight:    600;
+  --text-label-lh:        1.2;
+  --text-label-spacing:   0.06em;
+
+  --text-caption-size:    12px;
+  --text-caption-weight:  400;
+  --text-caption-lh:      1.5;
+}
+
+/* ============================================================
+   BASE ELEMENT STYLES
+   ============================================================ */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  color: var(--fg-secondary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display headings — main text Prussian Blue, last word gets gradient */
+.display-xl, .display-lg, .display-md {
+  font-family: var(--font-display);
+  color: var(--color-prussian-blue);
+  font-weight: 700;
+}
+.display-xl { font-size: var(--text-display-xl-size); line-height: var(--text-display-xl-lh); }
+.display-lg { font-size: var(--text-display-lg-size); line-height: var(--text-display-lg-lh); }
+.display-md { font-size: var(--text-display-md-size); line-height: var(--text-display-md-lh); font-weight: 600; }
+
+/* Gradient last-word accent — wrap the last word in <span class="accent-word"> */
+.accent-word {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1-size);
+  font-weight: var(--text-h1-weight);
+  line-height: var(--text-h1-lh);
+  color: var(--color-prussian-blue);
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2-size);
+  font-weight: var(--text-h2-weight);
+  line-height: var(--text-h2-lh);
+  color: var(--color-ocean-blue);
+  margin: 0 0 8px;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3-size);
+  font-weight: var(--text-h3-weight);
+  line-height: var(--text-h3-lh);
+  color: var(--color-prussian-blue);
+  margin: 0 0 8px;
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-h4-size);
+  font-weight: var(--text-h4-weight);
+  line-height: var(--text-h4-lh);
+  color: var(--color-ocean-blue);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-subtitle-size);
+  font-weight: var(--text-subtitle-weight);
+  line-height: var(--text-subtitle-lh);
+  color: var(--color-ocean-blue);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  color: var(--fg-secondary);
+  margin: 0 0 16px;
+}
+
+strong, b {
+  font-weight: 600;
+  color: var(--color-prussian-blue);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  line-height: var(--text-label-lh);
+  letter-spacing: var(--text-label-spacing);
+  text-transform: uppercase;
+  color: var(--color-prussian-blue);
+}
+
+.label-value {
+  color: var(--color-ocean-blue);
+}
+
+/* ============================================================
+   SPACING SCALE
+   ============================================================ */
+:root {
+  --space-0:  0px;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Layout rhythm */
+  --spacing-title-to-subtitle:   8px;
+  --spacing-heading-to-body:     24px;
+  --spacing-paragraph:           16px;
+  --spacing-section:             48px;
+  --spacing-page-margin:         64px;
+}
+
+/* ============================================================
+   BORDER RADIUS
+   ============================================================ */
+:root {
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 9999px;
+}
+
+/* ============================================================
+   SHADOW SYSTEM
+   ============================================================ */
+:root {
+  --shadow-sm:  0 1px 3px rgba(16,28,50,0.08), 0 1px 2px rgba(16,28,50,0.04);
+  --shadow-md:  0 4px 12px rgba(16,28,50,0.10), 0 2px 4px rgba(16,28,50,0.06);
+  --shadow-lg:  0 8px 24px rgba(16,28,50,0.12), 0 4px 8px rgba(16,28,50,0.06);
+  --shadow-xl:  0 16px 48px rgba(16,28,50,0.14), 0 8px 16px rgba(16,28,50,0.08);
+}
+
+/* ============================================================
+   LOGO COLOR FIX
+   SVG logos use st0/st1 classes; inject colors via :root
+   ============================================================ */
+.bc-logo .st0 { fill: var(--color-baltic-blue); }
+.bc-logo .st1 { fill: var(--color-ocean-blue); }
+.bc-logo-white .st0,
+.bc-logo-white .st1 { fill: #FFFFFF; }
+
+/* ============================================================
+   DUAL-COLOR DIVIDER
+   Short accent bar below the first word of titles
+   ============================================================ */
+.bc-divider {
+  display: flex;
+  height: 4px;
+  width: 64px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin: 12px 0 20px;
+}
+.bc-divider::before {
+  content: '';
+  flex: 1;
+  background: var(--color-baltic-blue);
+}
+.bc-divider::after {
+  content: '';
+  flex: 1;
+  background: var(--color-ocean-blue);
+}
+
+/* ============================================================
+   ICON UTILITY
+   Icons inherit color via currentColor; use .bc-icon-{color}
+   ============================================================ */
+.bc-icon { display: inline-block; width: 24px; height: 24px; }
+.bc-icon svg { width: 100%; height: 100%; }
+.bc-icon-primary   { color: var(--color-ocean-blue); }
+.bc-icon-dark      { color: var(--color-prussian-blue); }
+.bc-icon-white     { color: #FFFFFF; }
+.bc-icon-success   { color: var(--color-success); }
+.bc-icon-warning   { color: var(--color-warning); }
+.bc-icon-error     { color: var(--color-error); }
