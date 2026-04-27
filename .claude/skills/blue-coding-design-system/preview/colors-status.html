@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.row { display: flex; gap: 12px; }
+.swatch { flex: 1; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.color-block { height: 72px; display: flex; align-items: center; justify-content: center; }
+.pill { background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; font-family: var(--font-body); letter-spacing: .04em; text-transform: uppercase; }
+.swatch-info { padding: 10px 12px; background: #fff; }
+.swatch-name { font-size: 12px; font-weight: 600; color: var(--color-prussian-blue); }
+.swatch-hex  { font-size: 11px; color: var(--color-charcoal); font-family: monospace; margin-top: 2px; }
+</style></head><body>
+<div class="row">
+  <div class="swatch">
+    <div class="color-block" style="background:#2BA77A;"><span class="pill">Success</span></div>
+    <div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#2BA77A</div></div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#E0A93B;"><span class="pill">Warning</span></div>
+    <div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#E0A93B</div></div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#D94A4A;"><span class="pill">Error</span></div>
+    <div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#D94A4A</div></div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#0091CE;"><span class="pill">Info</span></div>
+    <div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#0091CE</div></div>
+  </div>
+</div>
+</body></html>

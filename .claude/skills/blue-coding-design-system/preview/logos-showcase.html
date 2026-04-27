@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.logo-card { border-radius: var(--radius-lg); padding: 20px 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+.logo-card.light { background: #fff; }
+.logo-card.dark  { background: var(--color-prussian-blue); }
+.logo-wrap { display: flex; align-items: center; gap: 32px; }
+.logo-wrap svg, .logo-wrap img { height: 36px; width: auto; }
+.logo-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.logo-card.light .logo-label { color: var(--color-charcoal); }
+.logo-card.dark  .logo-label { color: rgba(255,255,255,.45); }
+.row { display: flex; gap: 12px; }
+.symbol-wrap svg { height: 52px; width: auto; }
+</style>
+</head><body>
+
+<div id="showcase"></div>
+
+<script>
+// st0 = Baltic Blue (left B), st1 = Ocean Blue (right B + text)
+const colorSVGs = { st0: '#01638E', st1: '#0091CE' };
+const whiteSVGs = { st0: '#FFFFFF', st1: '#FFFFFF' };
+
+async function inlineSVG(src, colors, height) {
+  const res = await fetch(src);
+  let text = await res.text();
+  text = text.replace(/style="enable-background:[^"]*"/g, '');
+  const tmp = document.createElement('div');
+  tmp.innerHTML = text;
+  const svg = tmp.querySelector('svg');
+  // Apply fill directly as attributes — beats any external CSS
+  svg.querySelectorAll('.st0').forEach(el => {
+    el.setAttribute('fill', colors.st0);
+    el.removeAttribute('class');
+  });
+  svg.querySelectorAll('.st1').forEach(el => {
+    el.setAttribute('fill', colors.st1);
+    el.removeAttribute('class');
+  });
+  svg.setAttribute('height', height);
+  svg.removeAttribute('width');
+  svg.style.cssText = 'width:auto;height:' + height + 'px;';
+  return svg.outerHTML;
+}
+
+async function render() {
+  const wrap = document.getElementById('showcase');
+
+  // Row 1: Full logos
+  const [logoColour, logoWhite] = await Promise.all([
+    inlineSVG('../assets/logos/Logo-Colour.svg', colorSVGs, 36),
+    inlineSVG('../assets/logos/Logo-White.svg',  whiteSVGs, 36),
+  ]);
+  wrap.innerHTML += `
+    <div style="display:flex;gap:12px;margin-bottom:12px;">
+      <div class="logo-card light" style="flex:1;">
+        <div class="logo-label">Full logo — colour</div>
+        <div>${logoColour}</div>
+      </div>
+      <div class="logo-card dark" style="flex:1;">
+        <div class="logo-label">Full logo — white</div>
+        <div>${logoWhite}</div>
+      </div>
+    </div>`;
+
+  // Row 2: Logotypes + symbols
+  const [ltColour, ltWhite, symColour, symWhite] = await Promise.all([
+    inlineSVG('../assets/logos/Logotype-Colour.svg', { st0: '#0091CE', st1: '#0091CE' }, 32),
+    inlineSVG('../assets/logos/Logotype-White.svg',  whiteSVGs, 32),
+    inlineSVG('../assets/logos/Symbol-Colour.svg',   colorSVGs, 52),
+    inlineSVG('../assets/logos/Symbol-White.svg',    whiteSVGs, 52),
+  ]);
+  wrap.innerHTML += `
+    <div style="display:flex;gap:12px;">
+      <div class="logo-card light" style="flex:2;">
+        <div class="logo-label">Logotype — colour</div>
+        <div>${ltColour}</div>
+      </div>
+      <div class="logo-card dark" style="flex:2;">
+        <div class="logo-label">Logotype — white</div>
+        <div>${ltWhite}</div>
+      </div>
+      <div class="logo-card light" style="flex:1;">
+        <div class="logo-label">Symbol — colour</div>
+        <div>${symColour}</div>
+      </div>
+      <div class="logo-card dark" style="flex:1;">
+        <div class="logo-label">Symbol — white</div>
+        <div>${symWhite}</div>
+      </div>
+    </div>`;
+}
+render();
+</script>
+</body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.img-card { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); position: relative; }
+.img-card img { width: 100%; height: 90px; object-fit: cover; display: block; }
+.img-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(16,28,50,.7)); padding: 16px 8px 6px; font-size: 9px; color: #fff; font-weight: 500; }
+.note { font-size: 11px; color: var(--color-charcoal); margin-top: 10px; font-style: italic; }
+</style></head><body>
+<div class="grid">
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Environment_01_16x9.png"><div class="img-label">Environment 01</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Individual_01_3x2.png"><div class="img-label">Individual 01</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Individual_02_16x9.png"><div class="img-label">Individual 02</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Individual_03_4x5.png"><div class="img-label">Individual 03</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Individual_04_1x1.png"><div class="img-label">Individual 04</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Team_01_4x5.png"><div class="img-label">Team 01</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Team_02_3x2.png"><div class="img-label">Team 02</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Team_03_4x5.png"><div class="img-label">Team 03</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Team_04_1x1.png"><div class="img-label">Team 04</div></div>
+  <div class="img-card"><img src="../assets/imagery/BC_Image_Team_05_3x2.png"><div class="img-label">Team 05</div></div>
+</div>
+<p class="note">Biophilic office settings · Diverse subjects · Cinematic 50mm f/1.2 · Quiet luxury aesthetic</p>
+</body></html>

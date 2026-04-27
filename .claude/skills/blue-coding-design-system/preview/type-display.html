@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.specimen { background: #fff; border-radius: var(--radius-lg); padding: 24px 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 20px; }
+.row { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--color-lavender); padding-bottom: 16px; }
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+.meta { min-width: 110px; flex-shrink: 0; }
+.meta-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-charcoal); }
+.meta-spec  { font-size: 10px; color: var(--color-charcoal); margin-top: 3px; font-family: monospace; opacity: .7; }
+.text-sample { flex: 1; }
+.accent-word { background: linear-gradient(135deg, #1F96DB, #3771D6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+</style></head><body>
+<div class="specimen">
+  <div class="row">
+    <div class="meta"><div class="meta-label">Display XL</div><div class="meta-spec">72px / 700 / 1.1</div><div class="meta-spec">Poppins</div></div>
+    <div class="text-sample" style="font-family:'Poppins',sans-serif;font-size:52px;font-weight:700;line-height:1.1;color:#101C32;">Hire smarter, <span class="accent-word">faster</span></div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="meta-label">Display LG</div><div class="meta-spec">56px / 700 / 1.15</div><div class="meta-spec">Poppins</div></div>
+    <div class="text-sample" style="font-family:'Poppins',sans-serif;font-size:40px;font-weight:700;line-height:1.15;color:#101C32;">Engineering talent on <span class="accent-word">demand</span></div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="meta-label">Display MD</div><div class="meta-spec">40px / 600 / 1.2</div><div class="meta-spec">Poppins</div></div>
+    <div class="text-sample" style="font-family:'Poppins',sans-serif;font-size:30px;font-weight:600;line-height:1.2;color:#101C32;">Build teams with <span class="accent-word">confidence</span></div>
+  </div>
+</div>
+</body></html>

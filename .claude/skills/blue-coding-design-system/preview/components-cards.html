@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.grid { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Stat card */
+.stat-card { background: #fff; border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); min-width: 130px; }
+.stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-prussian-blue); line-height: 1; }
+.stat-value span { background: linear-gradient(135deg,#1F96DB,#3771D6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stat-label { font-size: 12px; color: var(--color-charcoal); margin-top: 6px; }
+
+/* Feature card */
+.feature-card { background: #fff; border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); flex: 1; min-width: 200px; max-width: 260px; }
+.feature-icon { width: 36px; height: 36px; background: var(--color-lavender); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--color-ocean-blue); }
+.feature-icon svg { width: 22px; height: 22px; }
+.feature-title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--color-prussian-blue); margin-bottom: 6px; }
+.feature-body { font-size: 13px; color: var(--color-charcoal); line-height: 1.55; }
+
+/* Dark card */
+.dark-card { background: var(--color-prussian-blue); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-md); min-width: 200px; max-width: 260px; position: relative; overflow: hidden; }
+.dark-card::after { content:''; position:absolute; inset:0; background-image: url('../assets/patterns/Pattern_HORIZONTAL.svg'); background-size: cover; background-position: right; opacity: .07; }
+.dark-card-title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; position: relative; z-index:1; }
+.dark-card-body { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.55; position: relative; z-index:1; }
+</style></head><body>
+<div class="grid">
+  <div class="stat-card"><div class="stat-value"><span>10+</span></div><div class="stat-label">Years in business</div></div>
+  <div class="stat-card"><div class="stat-value"><span>500+</span></div><div class="stat-label">Engineers placed</div></div>
+  <div class="stat-card"><div class="stat-value"><span>98%</span></div><div class="stat-label">Client retention</div></div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><circle cx="80" cy="96" r="64" opacity=".2" fill="currentColor"/><circle cx="80" cy="96" r="64" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M16,216a112,112,0,0,1,182.1-12.3" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M186,120a64,64,0,1,1,0,96" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><polyline points="158 152 190 184 242 136" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="feature-title">Staff Augmentation</div>
+    <div class="feature-body">Embed pre-vetted LATAM engineers directly into your team.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M96,96,80,32l48-24,48,24L160,96,128,224Z" opacity=".2" fill="currentColor"/><path d="M96,96,80,32l48-24,48,24L160,96,128,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="96" y1="96" x2="160" y2="96" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+    </div>
+    <div class="feature-title">Dedicated AI Pods</div>
+    <div class="feature-body">Purpose-built AI teams to accelerate your ML roadmap.</div>
+  </div>
+  <div class="dark-card">
+    <div class="dark-card-title">Zero-compromise quality</div>
+    <div class="dark-card-body">Every engineer cleared via technical assessments and live code review.</div>
+  </div>
+</div>
+</body></html>

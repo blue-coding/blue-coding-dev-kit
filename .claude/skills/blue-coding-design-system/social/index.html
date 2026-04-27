@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Coding — Social Media Templates</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="../design-canvas.jsx"></script>
+<style>
+@font-face{font-family:'Maven Pro';src:url('../fonts/MavenPro-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Maven Pro',sans-serif;background:#1a1a1a;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const T={
+  baltic:'#01638E',ocean:'#0091CE',bluebell:'#1F96DB',
+  sapphire:'#3771D6',lavender:'#D7E4F9',prussian:'#101C32',
+  alice:'#F5FAFF',charcoal:'#545454',
+  grad:'linear-gradient(135deg,#1F96DB 0%,#3771D6 100%)',
+  fontD:"'Poppins',sans-serif",fontB:"'Maven Pro',sans-serif",
+};
+const Accent=({children})=><span style={{background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>{children}</span>;
+const BottomBar=()=>(
+  <div style={{position:'absolute',bottom:0,left:0,right:0,height:6,display:'flex',zIndex:10}}>
+    <div style={{flex:1,background:T.baltic}}/><div style={{flex:1,background:T.ocean}}/>
+  </div>
+);
+const Bar=({width=56,height=5,margin='16px 0'})=>(
+  <div style={{display:'flex',width,height,borderRadius:2,overflow:'hidden',margin,flexShrink:0}}>
+    <div style={{flex:1,background:T.baltic}}/><div style={{flex:1,background:T.ocean}}/>
+  </div>
+);
+const Post=({w,h,bg=T.prussian,children})=>(
+  <div style={{width:w,height:h,background:bg,position:'relative',overflow:'hidden',fontFamily:T.fontB,flexShrink:0}}>
+    {children}
+  </div>
+);
+
+/* ── Logo injection (properly sizes SVG) ───────────────────── */
+const mkLogo=(src,st0,st1,height)=>{
+  const ref=React.useRef(null);
+  React.useEffect(()=>{
+    fetch(src).then(r=>r.text()).then(text=>{
+      const tmp=document.createElement('div');
+      tmp.innerHTML=text.replace(/style="enable-background:[^"]*"/g,'');
+      const svg=tmp.querySelector('svg');
+      if(!svg) return;
+      svg.querySelectorAll('.st0').forEach(el=>{el.setAttribute('fill',st0);el.removeAttribute('class');});
+      svg.querySelectorAll('.st1').forEach(el=>{el.setAttribute('fill',st1);el.removeAttribute('class');});
+      svg.removeAttribute('style');svg.removeAttribute('width');svg.removeAttribute('height');
+      svg.style.cssText=`height:${height}px;width:auto;display:block;`;
+      if(ref.current){ref.current.innerHTML='';ref.current.appendChild(svg);}
+    });
+  },[]);
+  return ref;
+};
+const Sym=({dark=false,h=40,top=52,left=52})=>{
+  const ref=mkLogo(dark?'../assets/logos/Symbol-White.svg':'../assets/logos/Symbol-Colour.svg',dark?'#fff':T.baltic,dark?'#fff':T.ocean,h);
+  return <div ref={ref} style={{position:'absolute',top,left,zIndex:10,height:h}}/>;
+};
+const Logo=({dark=false,h=36,top=52,left=52})=>{
+  const ref=mkLogo(dark?'../assets/logos/Logo-White.svg':'../assets/logos/Logo-Colour.svg',dark?'#fff':T.baltic,dark?'#fff':T.ocean,h);
+  return <div ref={ref} style={{position:'absolute',top,left,zIndex:10,height:h}}/>;
+};
+
+/* ── Inline SVG icon ───────────────────────────────────────── */
+const Icon=({src,size=48,fill=T.baltic,stroke=T.bluebell,fillOpacity=0.2,style={}})=>{
+  const ref=React.useRef(null);
+  React.useEffect(()=>{
+    fetch(src).then(r=>r.text()).then(text=>{
+      const tmp=document.createElement('div');tmp.innerHTML=text;
+      const svg=tmp.querySelector('svg');
+      if(!svg) return;
+      svg.querySelectorAll('[opacity="0.2"]').forEach(el=>{
+        el.setAttribute('fill',fill);
+        el.setAttribute('fill-opacity', String(fillOpacity));
+        el.removeAttribute('opacity');
+      });
+      svg.querySelectorAll('[stroke="currentColor"]').forEach(el=>el.setAttribute('stroke',stroke));
+      svg.querySelectorAll('[fill="currentColor"]').forEach(el=>el.setAttribute('fill',stroke));
+      svg.querySelectorAll('rect[fill="none"]').forEach(el=>el.remove());
+      svg.removeAttribute('width');svg.removeAttribute('height');
+      svg.style.cssText=`width:${size}px;height:${size}px;display:block;`;
+      if(ref.current){ref.current.innerHTML='';ref.current.appendChild(svg);}
+    });
+  },[src,size]);
+  return <div ref={ref} style={{width:size,height:size,flexShrink:0,...style}}/>;
+};
+
+/* ══════════════════════════════════════════════════════════════
+   STAT — divider below subtitle; small icon accent
+══════════════════════════════════════════════════════════════ */
+const StatDarkIG=()=>(
+  <Post w={1080} h={1350}>
+    <Logo dark h={36} top={52} left={52}/>
+    <div style={{position:'absolute',right:-60,top:180,fontFamily:T.fontD,fontSize:600,fontWeight:700,lineHeight:1,color:'rgba(255,255,255,.03)',userSelect:'none',pointerEvents:'none'}}>500</div>
+    <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 96px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:16,marginBottom:24}}>
+        <Icon src="../assets/icons/Business/trend-up-duotone.svg" size={36} fill={T.bluebell} stroke={T.ocean}/>
+        <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.12em',textTransform:'uppercase',color:T.ocean}}>By the numbers</div>
+      </div>
+      <div style={{fontFamily:T.fontD,fontSize:200,fontWeight:700,lineHeight:.9,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>500+</div>
+      <div style={{fontFamily:T.fontD,fontSize:52,fontWeight:700,color:'#fff',lineHeight:1.15,marginTop:12}}>Engineers placed<br/>in global teams</div>
+      {/* Divider below white subtitle */}
+      <Bar margin="20px 0 20px"/>
+      <div style={{fontSize:24,color:'rgba(255,255,255,.45)',lineHeight:1.65}}>Pre-vetted · Time-zone aligned · Day-one ready</div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const StatLightIG=()=>(
+  <Post w={1080} h={1350} bg="#fff">
+    <Sym dark={true} h={40} top={52} left={52}/>
+    <div style={{position:'absolute',left:0,top:0,bottom:0,width:12,background:T.grad}}/>
+    <div style={{position:'absolute',inset:0,display:'grid',gridTemplateColumns:'1fr 1fr'}}>
+      <div style={{background:T.prussian,display:'flex',flexDirection:'column',justifyContent:'center',padding:'120px 64px 80px 64px'}}>
+        <div style={{fontFamily:T.fontB,fontSize:20,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:24}}>Track record</div>
+        {[['500+','Engineers placed'],['98%','Retention rate'],['10+','Years active'],['72h','To first hire']].map(([n,l])=>(
+          <div key={n} style={{marginBottom:32}}>
+            <div style={{fontFamily:T.fontD,fontSize:64,fontWeight:700,lineHeight:1,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>{n}</div>
+            <div style={{fontSize:18,color:'rgba(255,255,255,.5)',marginTop:4}}>{l}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{background:T.alice,display:'flex',flexDirection:'column',justifyContent:'center',padding:'80px 56px'}}>
+        <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:16}}>
+          <Icon src="../assets/icons/Business/chart-bar-duotone.svg" size={32} fill={T.lavender} stroke={T.ocean}/>
+        </div>
+        <div style={{fontFamily:T.fontD,fontSize:40,fontWeight:700,color:T.prussian,lineHeight:1.2}}>Numbers that speak for <Accent>themselves</Accent>.</div>
+        <Bar/>
+        <div style={{fontSize:20,color:T.charcoal,lineHeight:1.65}}>Blue Coding connects LATAM engineering talent with global teams — since 2014.</div>
+        <div style={{marginTop:40,fontFamily:T.fontB,fontSize:18,fontWeight:600,color:T.ocean}}>bluecoding.com</div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const StatDarkLI=()=>(
+  <Post w={1200} h={1200}>
+    <Logo dark h={36} top={56} left={56}/>
+    <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',padding:'0 100px'}}>
+      <div style={{width:'100%'}}>
+        <div style={{display:'flex',alignItems:'center',gap:16,marginBottom:28}}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="36" height="36" style={{flexShrink:0}}>
+            <circle cx="128" cy="96" r="48" fill={T.bluebell} fillOpacity="0.2"/>
+            <circle cx="128" cy="96" r="80" fill="none" stroke={T.ocean} strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+            <circle cx="128" cy="96" r="48" fill="none" stroke={T.ocean} strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+            <polyline points="176 160 176 240 127.99 216 80 240 80 160.01" fill="none" stroke={T.ocean} strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+          </svg>
+          <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean}}>10+ years · 500+ engineers</div>
+        </div>
+        <div style={{fontFamily:T.fontD,fontSize:180,fontWeight:700,lineHeight:1,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>98%</div>
+        <div style={{fontFamily:T.fontD,fontSize:48,fontWeight:700,color:'#fff',lineHeight:1.2,marginTop:12}}>Client retention<br/>year over year</div>
+        <Bar width={72} margin="20px 0 20px"/>
+        <div style={{fontSize:22,color:'rgba(255,255,255,.5)'}}>Zero compromise on quality or velocity.</div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const StatLandscapeLI=()=>(
+  <Post w={1200} h={627}>
+    <Sym dark h={32} top={44} left={44}/>
+    <div style={{position:'absolute',inset:0,display:'grid',gridTemplateColumns:'1fr 1fr',alignItems:'center',padding:'0 80px',gap:60}}>
+      <div>
+        <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:20}}>
+          <Icon src="../assets/icons/Business/lightning-duotone.svg" size={30} fill={T.bluebell} stroke={T.ocean}/>
+          <div style={{fontFamily:T.fontB,fontSize:18,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean}}>By the numbers</div>
+        </div>
+        <div style={{fontFamily:T.fontD,fontSize:120,fontWeight:700,lineHeight:1,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>72h</div>
+        <div style={{fontFamily:T.fontD,fontSize:32,fontWeight:700,color:'#fff',lineHeight:1.2,marginTop:12}}>Average time to<br/>first candidate</div>
+        <Bar width={56} height={4} margin="16px 0"/>
+      </div>
+      <div style={{display:'flex',flexDirection:'column',gap:18}}>
+        {[['500+','Engineers placed globally'],['98%','Client retention rate'],['10+','Years in business']].map(([n,l])=>(
+          <div key={n} style={{display:'flex',alignItems:'center',gap:20,background:'rgba(255,255,255,.06)',borderRadius:12,padding:'16px 24px'}}>
+            <div style={{fontFamily:T.fontD,fontSize:36,fontWeight:700,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',minWidth:80}}>{n}</div>
+            <div style={{fontSize:18,color:'rgba(255,255,255,.55)'}}>{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   QUOTE — solid white cards, opening+closing quotes, bigger text
+══════════════════════════════════════════════════════════════ */
+const QuoteDarkIG=()=>(
+  <Post w={1080} h={1350}>
+    <Sym dark h={36} top={52} left={52}/>
+    <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',padding:'152px 120px 128px'}}>
+      {/* Solid white card */}
+      <div style={{background:'#fff',borderRadius:28,padding:'52px 56px',width:'100%',display:'flex',flexDirection:'column',gap:32}}>
+        <div>
+          <div style={{fontFamily:T.fontD,fontSize:100,fontWeight:700,lineHeight:.65,color:T.ocean,opacity:.3,marginBottom:12}}>&#8220;</div>
+          <div style={{fontFamily:T.fontD,fontSize:68,fontWeight:600,color:T.prussian,lineHeight:1.3}}>
+            The engineers feel like part of our company — not contractors.
+            <span style={{fontFamily:T.fontD,fontSize:74,fontWeight:700,lineHeight:.5,color:T.ocean,opacity:.3,marginLeft:8,verticalAlign:'middle'}}>&#8221;</span>
+          </div>
+        </div>
+        <div>
+          <Bar width={56} height={4} margin="32px 0 28px"/>
+          <div style={{display:'flex',alignItems:'center',gap:20}}>
+            <div style={{width:72,height:72,borderRadius:'50%',overflow:'hidden',flexShrink:0}}>
+              <img src="../assets/imagery/BC_Image_Individual_04_1x1.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+            </div>
+            <div>
+              <div style={{fontSize:24,fontWeight:600,color:T.prussian}}>Sarah M.</div>
+              <div style={{fontSize:19,color:T.charcoal,marginTop:4}}>CTO · Series B Startup</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const QuoteLightIG=()=>(
+  <Post w={1080} h={1350} bg={T.lavender}>
+    <Logo dark={false} h={36} top={52} left={52}/>
+    <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',padding:'152px 120px 128px'}}>
+      <div style={{background:'#fff',borderRadius:28,padding:'48px 52px',width:'100%',display:'flex',flexDirection:'column',gap:32,boxShadow:'0 24px 80px rgba(16,28,50,.12)'}}>
+        <div>
+          <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,lineHeight:.65,color:T.ocean,opacity:.25,marginBottom:12}}>&#8220;</div>
+          <div style={{fontFamily:T.fontD,fontSize:66,fontWeight:600,color:T.prussian,lineHeight:1.3}}>
+            Blue Coding delivered a senior team in under a week. Zero <Accent>ramp-up</Accent>.
+            <span style={{fontFamily:T.fontD,fontSize:70,fontWeight:700,lineHeight:.5,color:T.ocean,opacity:.25,marginLeft:6,verticalAlign:'middle'}}>&#8221;</span>
+          </div>
+        </div>
+        <div>
+          <Bar width={56} height={4} margin="28px 0 24px"/>
+          <div style={{display:'flex',alignItems:'center',gap:20}}>
+            <div style={{width:80,height:80,borderRadius:'50%',overflow:'hidden',flexShrink:0}}>
+              <img src="../assets/imagery/BC_Image_Individual_01_3x2.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'top',display:'block'}}/>
+            </div>
+            <div>
+              <div style={{fontSize:24,fontWeight:600,color:T.prussian}}>Carlos R.</div>
+              <div style={{fontSize:19,color:T.charcoal,marginTop:2}}>VP Engineering · Enterprise SaaS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const QuoteLandscapeLI=()=>(
+  <Post w={1200} h={627}>
+    <Logo dark h={28} top={36} left={48}/>
+    <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',padding:'96px 100px 88px'}}>
+      <div style={{background:'#fff',borderRadius:24,padding:'40px 48px',width:'100%',height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',gap:32,boxShadow:'0 8px 40px rgba(16,28,50,.08)'}}>
+        <div>
+          <div style={{fontFamily:T.fontD,fontSize:64,fontWeight:700,lineHeight:.6,color:T.ocean,opacity:.25,marginBottom:8}}>&#8220;</div>
+          <div style={{fontFamily:T.fontD,fontSize:52,fontWeight:600,color:T.prussian,lineHeight:1.3}}>
+            We scaled our AI pod from 2 to 12 engineers in 3 months. Exceptional <Accent>results</Accent>.
+            <span style={{fontFamily:T.fontD,fontSize:56,fontWeight:700,lineHeight:.5,color:T.ocean,opacity:.25,marginLeft:6,verticalAlign:'middle'}}>&#8221;</span>
+          </div>
+        </div>
+        <div style={{display:'flex',alignItems:'center',gap:20}}>
+          <div style={{width:64,height:64,borderRadius:'50%',overflow:'hidden',flexShrink:0}}>
+            <img src="../assets/imagery/BC_Image_Individual_04_1x1.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+          </div>
+          <div>
+            <div style={{fontSize:26,fontWeight:600,color:T.prussian}}>VP Engineering</div>
+            <div style={{fontSize:20,color:T.charcoal,marginTop:4}}>Enterprise SaaS · 500+ employees</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   JOB — text slightly above center, more space before URL
+══════════════════════════════════════════════════════════════ */
+const JobDarkIG=()=>(
+  <Post w={1080} h={1350}>
+    <Logo dark h={36} top={52} left={52}/>
+    <div style={{position:'absolute',inset:0,display:'grid',gridTemplateColumns:'46% 54%'}}>
+      <div style={{background:T.grad,display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'flex-start',padding:'300px 44px 80px 60px'}}>
+        <div style={{fontFamily:T.fontB,fontSize:15,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'rgba(255,255,255,.8)',marginBottom:16}}>We&apos;re hiring</div>
+        <div style={{fontFamily:T.fontD,fontSize:72,fontWeight:700,color:'#fff',lineHeight:1.0}}>Senior<br/>Full-<br/>Stack</div>
+        <div style={{width:44,height:4,background:'rgba(255,255,255,.35)',borderRadius:2,margin:'18px 0'}}/>
+        <div style={{fontFamily:T.fontD,fontSize:36,fontWeight:600,color:'rgba(255,255,255,.9)',marginBottom:44}}>Engineer</div>
+        <div style={{background:T.prussian,color:'#fff',fontFamily:T.fontB,fontSize:18,fontWeight:600,padding:'16px 36px',borderRadius:9999}}>Apply now →</div>
+      </div>
+      <div style={{background:T.prussian,display:'flex',flexDirection:'column',justifyContent:'flex-start',padding:'300px 52px 80px 44px'}}>
+        {[['Remote','Latin America'],['Level','Senior · Full-time'],['Team','Product Engineering'],['Stack','React · Node · AWS'],['Start','ASAP']].map(([k,v])=>(
+          <div key={k} style={{marginBottom:36}}>
+            <div style={{fontFamily:T.fontB,fontSize:14,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:6}}>{k}</div>
+            <div style={{fontSize:30,color:'#fff',fontWeight:500,lineHeight:1.2}}>{v}</div>
+          </div>
+        ))}
+        <Bar width={44} height={4} margin="8px 0 28px"/>
+        <div style={{fontSize:16,color:'rgba(255,255,255,.35)'}}>bluecoding.com/careers</div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   SERVICE — icon spotlight + stat cards everywhere; bigger subtitles
+══════════════════════════════════════════════════════════════ */
+const StatMini=({dark=true})=>(
+  <div style={{display:'flex',gap:20}}>
+    {[['72h','first hire'],['500+','placed'],['98%','retention']].map(([n,l])=>(
+      <div key={n} style={{flex:1,background:dark?'rgba(255,255,255,.07)':'#fff',borderRadius:20,padding:'28px 20px',textAlign:'center',border:dark?'1px solid rgba(255,255,255,.08)':'none',boxShadow:dark?'none':'0 4px 16px rgba(16,28,50,.07)'}}>
+        <div style={{fontFamily:T.fontD,fontSize:44,fontWeight:700,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>{n}</div>
+        <div style={{fontSize:18,color:dark?'rgba(255,255,255,.5)':T.charcoal,marginTop:6}}>{l}</div>
+      </div>
+    ))}
+  </div>
+);
+
+const ServiceDarkIG=()=>(
+  <Post w={1080} h={1350}>
+    <Sym dark h={36} top={52} left={52}/>
+    <div style={{position:'absolute',left:'50%',top:260,transform:'translateX(-50%)',width:520,height:520,borderRadius:'50%',background:'radial-gradient(circle, rgba(31,150,219,.16) 0%, transparent 70%)',pointerEvents:'none'}}/>
+    <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'140px 80px 96px',textAlign:'center'}}>
+      <Icon src="../assets/icons/Business/rocket-launch-duotone.svg" size={140} fill={T.bluebell} stroke="#1F96DB" style={{marginBottom:40}}/>
+      <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.12em',textTransform:'uppercase',color:T.ocean,marginBottom:16}}>What we offer</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,color:'#fff',lineHeight:1.0}}>Dedicated</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,lineHeight:1.0,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',marginBottom:8}}>AI Pods</div>
+      <Bar width={72} height={5} margin="24px 0 20px"/>
+      <div style={{fontSize:32,color:'rgba(255,255,255,.6)',lineHeight:1.65,maxWidth:800,marginBottom:44}}>Purpose-built AI teams — data engineers, MLEs, and AI architects. Shipping in 72 hours.</div>
+      <StatMini dark={true}/>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const ServiceLightIG=()=>(
+  <Post w={1080} h={1350} bg={T.alice}>
+    <Logo dark={false} h={36} top={52} left={52}/>
+    <div style={{position:'absolute',right:-100,top:200,width:600,height:600,borderRadius:'50%',background:'radial-gradient(circle, rgba(0,145,206,.07) 0%, transparent 70%)',pointerEvents:'none'}}/>
+    <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'140px 80px 96px',textAlign:'center'}}>
+      <div style={{width:160,height:160,borderRadius:'50%',background:T.lavender,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:40,flexShrink:0}}>
+        <Icon src="../assets/icons/People/users-three-duotone.svg" size={88} fill={T.baltic} stroke={T.ocean}/>
+      </div>
+      <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.12em',textTransform:'uppercase',color:T.ocean,marginBottom:16}}>Our services</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,color:T.prussian,lineHeight:1.0}}>Staff</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,lineHeight:1.15,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',marginBottom:16,paddingBottom:12}}>Augmentation</div>
+      <Bar width={72} height={5} margin="24px 0 20px"/>
+      <div style={{fontSize:32,color:T.charcoal,lineHeight:1.65,maxWidth:800,marginBottom:44}}>Embed pre-vetted LATAM engineers directly into your team. Time-zone aligned. Day-one ready.</div>
+      <StatMini dark={false}/>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* Landscape Light: icon spotlight — icon left + stats right */
+const ServiceLightFB=()=>(
+  <Post w={1200} h={630} bg={T.alice}>
+    <Sym dark={false} h={30} top={36} left={44}/>
+    <div style={{position:'absolute',inset:0,display:'grid',gridTemplateColumns:'45% 55%',alignItems:'center',padding:'0 0 0 0'}}>
+      {/* Left: icon + service name */}
+      <div style={{background:T.prussian,height:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'80px 48px',textAlign:'center'}}>
+        <Icon src="../assets/icons/People/users-three-duotone.svg" size={80} fill={T.bluebell} stroke="#1F96DB" style={{marginBottom:24}}/>
+        <div style={{fontFamily:T.fontB,fontSize:15,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:12}}>What we offer</div>
+        <div style={{fontFamily:T.fontD,fontSize:52,fontWeight:700,color:'#fff',lineHeight:1.1}}>Staff<br/><span style={{background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>Augmentation</span></div>
+      </div>
+      {/* Right: stat cards + desc */}
+      <div style={{display:'flex',flexDirection:'column',justifyContent:'center',padding:'56px 60px 56px 48px',gap:16}}>
+        <div style={{fontSize:26,color:T.charcoal,lineHeight:1.6,marginBottom:8}}>Pre-vetted LATAM engineers embedded in your team. Day-one ready.</div>
+        {[['72h','Time to first candidate'],['500+','Engineers placed worldwide'],['98%','Client retention rate']].map(([n,l])=>(
+          <div key={n} style={{display:'flex',alignItems:'center',gap:16,background:'#fff',borderRadius:14,padding:'16px 24px',boxShadow:'0 4px 12px rgba(16,28,50,.06)'}}>
+            <div style={{fontFamily:T.fontD,fontSize:32,fontWeight:700,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',minWidth:76}}>{n}</div>
+            <div style={{fontSize:17,color:T.charcoal}}>{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   ANNOUNCEMENT — text just below image; light IG added
+══════════════════════════════════════════════════════════════ */
+const AnnounceDarkIG=()=>(
+  <Post w={1080} h={1350}>
+    <Logo dark h={36} top={52} left={52}/>
+    {/* Image banner — rounded, no fade */}
+    <div style={{position:'absolute',top:120,left:56,right:56,height:360,borderRadius:24,overflow:'hidden',zIndex:1}}>
+      <img src="../assets/imagery/BC_Image_Team_02_3x2.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center 30%',display:'block'}}/>
+    </div>
+    {/* Text just below image */}
+    <div style={{position:'absolute',top:504,left:0,right:0,bottom:0,display:'flex',flexDirection:'column',justifyContent:'flex-start',padding:'44px 88px 80px',zIndex:2}}>
+      <div style={{display:'inline-flex',background:'rgba(255,255,255,.08)',color:'rgba(255,255,255,.75)',fontFamily:T.fontB,fontSize:17,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',padding:'10px 24px',borderRadius:9999,width:'fit-content',marginBottom:28}}>Big news</div>
+      <div style={{fontFamily:T.fontD,fontSize:84,fontWeight:700,color:'#fff',lineHeight:1.0}}>AI Pods</div>
+      <div style={{fontFamily:T.fontD,fontSize:84,fontWeight:700,color:'#fff',lineHeight:1.0}}>2.0</div>
+      <div style={{fontFamily:T.fontD,fontSize:84,fontWeight:700,lineHeight:1.0,marginBottom:8,display:'flex',alignItems:'center',gap:20}}>
+        <span style={{background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>here.</span>
+        <Icon src="../assets/icons/Business/rocket-launch-duotone.svg" size={64} fill={T.bluebell} stroke={T.ocean}/>
+      </div>
+      <Bar width={72} height={5}/>
+      <div style={{fontSize:28,color:'rgba(255,255,255,.55)',lineHeight:1.65}}>Next-gen dedicated AI teams — embedded MLOps, zero onboarding overhead.</div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* Light IG: white bg, rounded image banner, clean editorial */
+const AnnounceLightIG=()=>(
+  <Post w={1080} h={1350} bg={T.alice}>
+    <Sym dark={false} h={36} top={52} left={52}/>
+    {/* Image banner — rounded, no fade */}
+    <div style={{position:'absolute',top:120,left:56,right:56,height:360,borderRadius:24,overflow:'hidden',zIndex:1}}>
+      <img src="../assets/imagery/BC_Image_Team_05_3x2.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center 30%',display:'block'}}/>
+    </div>
+    {/* Text just below image */}
+    <div style={{position:'absolute',top:504,left:0,right:0,bottom:0,display:'flex',flexDirection:'column',justifyContent:'flex-start',padding:'44px 88px 80px',zIndex:2}}>
+      <div style={{display:'inline-flex',background:T.lavender,color:T.prussian,fontFamily:T.fontB,fontSize:17,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',padding:'10px 24px',borderRadius:9999,width:'fit-content',marginBottom:28}}>Milestone reached</div>
+      <div style={{fontFamily:T.fontD,fontSize:80,fontWeight:700,color:T.prussian,lineHeight:1.0}}>500</div>
+      <div style={{fontFamily:T.fontD,fontSize:80,fontWeight:700,color:T.prussian,lineHeight:1.0}}>engineers.</div>
+      <div style={{fontFamily:T.fontD,fontSize:80,fontWeight:700,color:T.prussian,lineHeight:1.0,marginBottom:8,display:'flex',alignItems:'center',gap:20}}>
+        <span>one </span><span style={{background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>mission.</span>
+        <Icon src="../assets/icons/People/users-three-duotone.svg" size={64} fill={T.baltic} stroke={T.ocean}/>
+      </div>
+      <Bar width={72} height={5}/>
+      <div style={{fontSize:28,color:T.charcoal,lineHeight:1.65}}>Thank you to every client and engineer who made this possible. Here&apos;s to the next 500.</div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   TEAM / CULTURE — bigger fonts; "ship" on same line as "smarter"
+══════════════════════════════════════════════════════════════ */
+const TeamPhotoIG=()=>(
+  <Post w={1080} h={1350}>
+    <div style={{position:'absolute',inset:0}}>
+      <img src="../assets/imagery/BC_Image_Team_01_4x5.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',opacity:.55,display:'block'}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(16,28,50,.95) 0%, rgba(16,28,50,.3) 55%, transparent 100%)'}}/>
+    </div>
+    <Sym dark h={36} top={52} left={52}/>
+    <div style={{position:'absolute',bottom:80,left:96,right:96}}>
+      <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:16}}>Our culture</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,color:'#fff',lineHeight:1.1}}>Experts without <Accent>ego</Accent>.</div>
+      <Bar/>
+      <div style={{fontSize:28,color:'rgba(255,255,255,.6)'}}>Building teams that actually ship.</div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const TeamPhotoLandscape=()=>(
+  <Post w={1200} h={627}>
+    <div style={{position:'absolute',inset:0}}>
+      <img src="../assets/imagery/BC_Image_Individual_02_16x9.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',opacity:.5,display:'block'}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg, rgba(16,28,50,.95) 0%, rgba(16,28,50,.5) 55%, transparent 100%)'}}/>
+    </div>
+    <Logo dark h={32} top={44} left={44}/>
+    <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 80px',maxWidth:720,zIndex:1}}>
+      <div style={{fontFamily:T.fontB,fontSize:20,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:16}}>Life at Blue Coding</div>
+      {/* "ship" on next line, next to "smarter" */}
+      <div style={{fontFamily:T.fontD,fontSize:72,fontWeight:700,color:'#fff',lineHeight:1.15}}>Hire faster.<br/>Ship <Accent>smarter</Accent>.</div>
+      <Bar/>
+      <div style={{fontSize:24,color:'rgba(255,255,255,.6)'}}>Nearshore engineering talent, ready to go.</div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+/* ══════════════════════════════════════════════════════════════
+   IG STORIES — button below cards in light; line fix
+══════════════════════════════════════════════════════════════ */
+const StoryDark=()=>(
+  <Post w={1080} h={1920}>
+    <Logo dark h={44} top={80} left={64}/>
+    <div style={{position:'absolute',right:-200,top:-200,width:900,height:900,borderRadius:'50%',background:'radial-gradient(circle, rgba(31,150,219,.15) 0%, transparent 70%)'}}/>
+    <div style={{position:'absolute',left:-150,bottom:300,width:700,height:700,borderRadius:'50%',background:'radial-gradient(circle, rgba(55,113,214,.12) 0%, transparent 70%)'}}/>
+    <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 80px'}}>
+      <div style={{fontFamily:T.fontB,fontSize:22,fontWeight:600,letterSpacing:'.12em',textTransform:'uppercase',color:T.ocean,marginBottom:32}}>Blue Coding</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,color:'#fff',lineHeight:1.0}}>Build<br/>teams<br/>with</div>
+      <div style={{fontFamily:T.fontD,fontSize:88,fontWeight:700,lineHeight:1.0,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>confidence.</div>
+      <Bar width={80} height={5} margin="40px 0"/>
+      <div style={{fontSize:34,color:'rgba(255,255,255,.55)',lineHeight:1.65,marginBottom:48}}>Nearshore engineering talent connecting Latin America with the world — since 2014.</div>
+      <div style={{display:'flex',flexDirection:'column',gap:20}}>
+        {[['500+','Engineers placed'],['98%','Client retention'],['72h','To first candidate']].map(([n,l])=>(
+          <div key={n} style={{display:'flex',alignItems:'center',gap:24,background:'rgba(255,255,255,.05)',borderRadius:16,padding:'20px 28px',border:'1px solid rgba(255,255,255,.07)'}}>
+            <div style={{fontFamily:T.fontD,fontSize:44,fontWeight:700,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',minWidth:96}}>{n}</div>
+            <div style={{fontSize:22,color:'rgba(255,255,255,.6)'}}>{l}</div>
+          </div>
+        ))}
+      </div>
+      {/* Button right below cards */}
+      <div style={{marginTop:48}}>
+        <div style={{background:T.ocean,color:'#fff',fontFamily:T.fontB,fontSize:28,fontWeight:600,padding:'28px 0',borderRadius:9999,textAlign:'center'}}>Schedule a call</div>
+        <div style={{textAlign:'center',fontSize:18,color:'rgba(255,255,255,.4)',marginTop:16}}>bluecoding.com</div>
+      </div>
+    </div>
+    <BottomBar/>
+  </Post>
+);
+
+const StoryLight=()=>{
+  /* Photo card height ~520, starts at top 180 → ends at 700. Content from 760. */
+  const statsCards=[['500+','Engineers placed globally'],['98%','Client retention rate'],['72h','Avg. time to first candidate']];
+  return(
+    <Post w={1080} h={1920} bg={T.alice}>
+      <Logo dark={false} h={44} top={80} left={64}/>
+      <div style={{position:'absolute',top:0,left:0,right:0,height:8,background:T.grad}}/>
+      {/* Photo card */}
+      <div style={{position:'absolute',top:180,left:64,right:64,height:520,borderRadius:24,overflow:'hidden',boxShadow:'0 16px 60px rgba(16,28,50,.12)'}}>
+        <img src="../assets/imagery/BC_Image_Team_05_3x2.png" alt="" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}}/>
+      </div>
+      {/* Content below photo */}
+      <div style={{position:'absolute',top:760,left:64,right:64}}>
+        <div style={{fontFamily:T.fontB,fontSize:20,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:T.ocean,marginBottom:20}}>Nearshore Engineering</div>
+        {/* "Latin America" on same line — reduced font */}
+        <div style={{fontFamily:T.fontD,fontSize:50,fontWeight:700,color:T.prussian,lineHeight:1.05,marginBottom:28}}>Your next hire is in Latin&nbsp;<Accent>America</Accent>.</div>
+        <Bar width={72} height={5}/>
+        <div style={{fontSize:28,color:T.charcoal,lineHeight:1.65,marginBottom:32}}>Pre-vetted engineers, time-zone aligned, ready to ship from day one.</div>
+        {/* White stat cards */}
+        <div style={{display:'flex',flexDirection:'column',gap:16,marginBottom:40}}>
+          {statsCards.map(([n,l])=>(
+            <div key={n} style={{display:'flex',alignItems:'center',gap:20,background:'#fff',borderRadius:16,padding:'20px 28px',boxShadow:'0 4px 16px rgba(16,28,50,.07)'}}>
+              <div style={{fontFamily:T.fontD,fontSize:36,fontWeight:700,background:T.grad,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',minWidth:80}}>{n}</div>
+              <div style={{fontSize:20,color:T.charcoal}}>{l}</div>
+            </div>
+          ))}
+        </div>
+        {/* Button immediately below cards */}
+        <div style={{background:T.prussian,color:'#fff',fontFamily:T.fontB,fontSize:28,fontWeight:600,padding:'28px 0',borderRadius:9999,textAlign:'center'}}>Schedule a call</div>
+        <div style={{textAlign:'center',fontSize:18,color:T.charcoal,opacity:.5,marginTop:16}}>bluecoding.com</div>
+      </div>
+      <BottomBar/>
+    </Post>
+  );
+};
+
+/* ══════════════════════════════════════════════════════════════
+   CANVAS
+══════════════════════════════════════════════════════════════ */
+const App=()=>(
+  <DesignCanvas title="Blue Coding — Social Media Templates">
+    <DCSection id="stat" title="Stat / Number Callout ✓">
+      <DCArtboard id="s1" label="Instagram Portrait · Dark" width={1080} height={1350}><StatDarkIG/></DCArtboard>
+      <DCArtboard id="s2" label="Instagram Portrait · Light" width={1080} height={1350}><StatLightIG/></DCArtboard>
+      <DCArtboard id="s3" label="LinkedIn Square · Dark" width={1200} height={1200}><StatDarkLI/></DCArtboard>
+      <DCArtboard id="s4" label="LinkedIn Landscape · Dark" width={1200} height={627}><StatLandscapeLI/></DCArtboard>
+    </DCSection>
+    <DCSection id="quote" title="Quote / Testimonial">
+      <DCArtboard id="q1" label="Instagram Portrait · Dark" width={1080} height={1350}><QuoteDarkIG/></DCArtboard>
+      <DCArtboard id="q2" label="Instagram Portrait · Light" width={1080} height={1350}><QuoteLightIG/></DCArtboard>
+      <DCArtboard id="q3" label="LinkedIn Landscape · Dark" width={1200} height={627}><QuoteLandscapeLI/></DCArtboard>
+    </DCSection>
+    <DCSection id="job" title="Job Opening">
+      <DCArtboard id="j1" label="Instagram Portrait · Dark" width={1080} height={1350}><JobDarkIG/></DCArtboard>
+    </DCSection>
+    <DCSection id="service" title="Service Highlight">
+      <DCArtboard id="sv1" label="Instagram Portrait · Dark" width={1080} height={1350}><ServiceDarkIG/></DCArtboard>
+      <DCArtboard id="sv2" label="Instagram Portrait · Light" width={1080} height={1350}><ServiceLightIG/></DCArtboard>
+      <DCArtboard id="sv3" label="LinkedIn Landscape · Light" width={1200} height={630}><ServiceLightFB/></DCArtboard>
+    </DCSection>
+    <DCSection id="announce" title="Announcement">
+      <DCArtboard id="a1" label="Instagram Portrait · Dark" width={1080} height={1350}><AnnounceDarkIG/></DCArtboard>
+      <DCArtboard id="a2" label="Instagram Portrait · Light" width={1080} height={1350}><AnnounceLightIG/></DCArtboard>
+    </DCSection>
+    <DCSection id="team" title="Team / Culture ✓">
+      <DCArtboard id="t1" label="Instagram Portrait · Photo overlay" width={1080} height={1350}><TeamPhotoIG/></DCArtboard>
+      <DCArtboard id="t2" label="LinkedIn Landscape · Photo overlay" width={1200} height={627}><TeamPhotoLandscape/></DCArtboard>
+    </DCSection>
+    <DCSection id="stories" title="IG Stories (1080×1920)">
+      <DCArtboard id="st1" label="Stories · Dark" width={1080} height={1920}><StoryDark/></DCArtboard>
+      <DCArtboard id="st2" label="Stories · Light" width={1080} height={1920}><StoryLight/></DCArtboard>
+    </DCSection>
+  </DesignCanvas>
+);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

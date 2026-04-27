@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.wrap { display: flex; flex-direction: column; gap: 16px; }
+.grad-block { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.grad-color { height: 60px; background: linear-gradient(135deg, #1F96DB 0%, #3771D6 100%); }
+.grad-info { background: #fff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+.grad-label { font-size: 12px; font-weight: 600; color: var(--color-prussian-blue); }
+.grad-spec   { font-size: 11px; color: var(--color-charcoal); font-family: monospace; }
+.example { background: #fff; border-radius: var(--radius-lg); padding: 20px 24px; box-shadow: var(--shadow-sm); }
+.example-title { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-prussian-blue); }
+.example-title .accent-word { background: linear-gradient(135deg, #1F96DB, #3771D6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.example-note { font-size: 11px; color: var(--color-charcoal); margin-top: 8px; }
+</style></head><body>
+<div class="wrap">
+  <div class="grad-block">
+    <div class="grad-color"></div>
+    <div class="grad-info">
+      <span class="grad-label">Title gradient — last word accent</span>
+      <span class="grad-spec">135° · #1F96DB → #3771D6</span>
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-title">Build teams with <span class="accent-word">confidence</span></div>
+    <div class="example-note">Last word wrapped in <code>.accent-word</code> — applied to display-xl, display-lg, display-md only</div>
+  </div>
+</div>
+</body></html>

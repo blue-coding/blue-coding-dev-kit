@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.wrap { background: #fff; border-radius: var(--radius-lg); padding: 20px 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 14px; }
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.label-row { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-charcoal); }
+.badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 11px; font-weight: 600; border-radius: var(--radius-pill); padding: 3px 10px; letter-spacing: .02em; }
+.badge-primary   { background: rgba(0,145,206,.12); color: var(--color-ocean-blue); }
+.badge-dark      { background: var(--color-prussian-blue); color: #fff; }
+.badge-success   { background: rgba(43,167,122,.12); color: var(--color-success); }
+.badge-warning   { background: rgba(224,169,59,.15); color: #b07e1a; }
+.badge-error     { background: rgba(217,74,74,.12); color: var(--color-error); }
+.badge-lavender  { background: var(--color-lavender); color: var(--color-prussian-blue); }
+.badge-gradient  { background: linear-gradient(135deg,#1F96DB,#3771D6); color: #fff; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+</style></head><body>
+<div class="wrap">
+  <div class="label-row">Brand badges</div>
+  <div class="row">
+    <span class="badge badge-primary">Staff Augmentation</span>
+    <span class="badge badge-dark">AI Pods</span>
+    <span class="badge badge-gradient">New</span>
+    <span class="badge badge-lavender">Latin America</span>
+  </div>
+  <div class="label-row">Status badges</div>
+  <div class="row">
+    <span class="badge badge-success"><span class="dot"></span>Active</span>
+    <span class="badge badge-warning"><span class="dot"></span>In review</span>
+    <span class="badge badge-error"><span class="dot"></span>Paused</span>
+    <span class="badge badge-primary"><span class="dot"></span>Sourcing</span>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.row { display: flex; gap: 12px; }
+.swatch { flex: 1; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.color-block { height: 80px; }
+.swatch-info { padding: 10px 12px; background: #fff; }
+.swatch-name { font-size: 12px; font-weight: 600; color: var(--color-prussian-blue); }
+.swatch-hex  { font-size: 11px; color: var(--color-charcoal); font-family: monospace; margin-top: 2px; }
+.swatch-use  { font-size: 10px; color: var(--color-charcoal); margin-top: 4px; opacity: .7; }
+</style></head><body>
+<div class="row">
+  <div class="swatch">
+    <div class="color-block" style="background:#01638E;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Baltic Blue</div>
+      <div class="swatch-hex">#01638E</div>
+      <div class="swatch-use">Logo · main brand · titles</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#0091CE;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Ocean Blue</div>
+      <div class="swatch-hex">#0091CE</div>
+      <div class="swatch-use">Accents · highlights · H2/H4</div>
+    </div>
+  </div>
+</div>
+</body></html>

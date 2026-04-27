@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.row { display: flex; gap: 12px; }
+.swatch { flex: 1; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.color-block { height: 80px; position: relative; }
+.swatch-info { padding: 10px 12px; background: #fff; }
+.swatch-name { font-size: 12px; font-weight: 600; color: var(--color-prussian-blue); }
+.swatch-hex  { font-size: 11px; color: var(--color-charcoal); font-family: monospace; margin-top: 2px; }
+.swatch-use  { font-size: 10px; color: var(--color-charcoal); margin-top: 4px; opacity: .7; }
+.bordered .color-block { border: 1px solid var(--color-lavender); }
+</style></head><body>
+<div class="row">
+  <div class="swatch">
+    <div class="color-block" style="background:#101C32;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Prussian Blue</div>
+      <div class="swatch-hex">#101C32</div>
+      <div class="swatch-use">Primary text · dark bg · H1/H3</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#545454;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Charcoal</div>
+      <div class="swatch-hex">#545454</div>
+      <div class="swatch-use">Body text · secondary · dividers</div>
+    </div>
+  </div>
+  <div class="swatch bordered">
+    <div class="color-block" style="background:#F5FAFF;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Alice Blue</div>
+      <div class="swatch-hex">#F5FAFF</div>
+      <div class="swatch-use">Default page background</div>
+    </div>
+  </div>
+</div>
+</body></html>

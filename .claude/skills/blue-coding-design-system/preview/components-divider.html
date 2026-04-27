@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.wrap { background: #fff; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 20px; }
+.example { }
+.ex-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-charcoal); margin-bottom: 10px; }
+.title-block { display: flex; flex-direction: column; }
+.title-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--color-prussian-blue); }
+.accent-word { background: linear-gradient(135deg,#1F96DB,#3771D6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.divider { display: flex; height: 4px; width: 64px; border-radius: 2px; overflow: hidden; margin: 8px 0 14px; }
+.divider-l { flex:1; background: #01638E; }
+.divider-r { flex:1; background: #0091CE; }
+.subtitle { font-size: 14px; color: var(--color-ocean-blue); font-weight: 500; }
+
+/* Dark version */
+.dark-block { background: var(--color-prussian-blue); border-radius: var(--radius-lg); padding: 20px 24px; }
+.dark-block .title-text { color: #fff; }
+.dark-block .subtitle { color: rgba(255,255,255,.65); }
+</style></head><body>
+<div class="wrap">
+  <div class="example">
+    <div class="ex-label">Light — title + divider + subtitle</div>
+    <div class="title-block">
+      <div class="title-text">Engineering teams built for <span class="accent-word">velocity</span></div>
+      <div class="divider"><div class="divider-l"></div><div class="divider-r"></div></div>
+      <div class="subtitle">Nearshore talent from Latin America, ready to ship.</div>
+    </div>
+  </div>
+  <div class="example">
+    <div class="ex-label">Dark — title page style</div>
+    <div class="dark-block">
+      <div class="title-block">
+        <div class="title-text" style="color:#fff;">Hire smarter, scale with <span class="accent-word">confidence</span></div>
+        <div class="divider"><div class="divider-l"></div><div class="divider-r"></div></div>
+        <div class="subtitle" style="color:rgba(255,255,255,.65);">Blue Coding — Staff Augmentation & AI Pods</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

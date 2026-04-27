@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.specimen { background: #fff; border-radius: var(--radius-lg); padding: 20px 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--color-lavender); padding-bottom: 10px; }
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+.meta { min-width: 90px; flex-shrink: 0; }
+.meta-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-charcoal); }
+.meta-spec  { font-size: 10px; color: var(--color-charcoal); margin-top: 3px; font-family: monospace; opacity: .7; }
+</style></head><body>
+<div class="specimen">
+  <div class="row">
+    <div class="meta"><div class="meta-label">Label</div><div class="meta-spec">13px / 600 / UC</div></div>
+    <span class="label">Engagement model: <span class="label-value">Staff Augmentation</span></span>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="meta-label">Label</div><div class="meta-spec">13px / 600 / UC</div></div>
+    <span class="label">Region: <span class="label-value">Latin America</span></span>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="meta-label">Caption</div><div class="meta-spec">12px / 400 / 1.5</div></div>
+    <span style="font-size:12px;color:var(--color-charcoal);">All engineers are pre-vetted with technical assessments and live code reviews.</span>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="meta-label">Mono</div><div class="meta-spec">12px / monospace</div></div>
+    <code style="font-size:12px;background:var(--color-lavender);padding:3px 8px;border-radius:4px;color:var(--color-prussian-blue);">npm install @bluecoding/sdk</code>
+  </div>
+</div>
+</body></html>

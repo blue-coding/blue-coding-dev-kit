@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); font-family: var(--font-body); padding: 24px; }
+.row { display: flex; gap: 12px; }
+.swatch { flex: 1; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.color-block { height: 80px; }
+.swatch-info { padding: 10px 12px; background: #fff; }
+.swatch-name { font-size: 12px; font-weight: 600; color: var(--color-prussian-blue); }
+.swatch-hex  { font-size: 11px; color: var(--color-charcoal); font-family: monospace; margin-top: 2px; }
+.swatch-use  { font-size: 10px; color: var(--color-charcoal); margin-top: 4px; opacity: .7; }
+</style></head><body>
+<div class="row">
+  <div class="swatch">
+    <div class="color-block" style="background:#1F96DB;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Blue Bell</div>
+      <div class="swatch-hex">#1F96DB</div>
+      <div class="swatch-use">UI · gradient start</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#3771D6;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Sapphire Sky</div>
+      <div class="swatch-hex">#3771D6</div>
+      <div class="swatch-use">UI · gradient end</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#D7E4F9;"></div>
+    <div class="swatch-info">
+      <div class="swatch-name">Lavender</div>
+      <div class="swatch-hex">#D7E4F9</div>
+      <div class="swatch-use">Soft backgrounds · borders</div>
+    </div>
+  </div>
+</div>
+</body></html>
