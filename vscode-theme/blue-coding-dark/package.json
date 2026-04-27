@@ -1,0 +1,28 @@
+{
+  "name": "blue-coding-dark",
+  "displayName": "Blue Coding Dark",
+  "description": "Official Blue Coding dark theme — Baltic Blue & Ocean Blue palette for nearshore engineering teams.",
+  "version": "1.0.0",
+  "publisher": "blue-coding",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "blue coding",
+    "dark theme",
+    "blue",
+    "nearshore"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Blue Coding Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Blue-Coding-Dark-color-theme.json"
+      }
+    ]
+  }
+}
