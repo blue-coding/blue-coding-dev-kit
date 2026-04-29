@@ -90,12 +90,15 @@ _bc_set_palette() {
 
 # ─── ASCII banner ─────────────────────────────────────────────────────────────
 _bc_banner() {
-  local B="$BC_BALTIC$BC_BOLD"
-  local O="$BC_OCEAN$BC_BOLD"
-  local S="$BC_SAPPHIRE$BC_BOLD"
-  local C="$BC_CYAN"
-  local M="$BC_MUTED"
-  local R="$BC_RESET"
+  local G1="${BC_BALTIC}${BC_BOLD}"
+  local G2="${BC_OCEAN}${BC_BOLD}"
+  local G3="${BC_BLUEBELL}${BC_BOLD}"
+  local G4="${BC_SAPPHIRE}${BC_BOLD}"
+  local G5="${BC_CYAN}${BC_BOLD}"
+  local G6="${BC_WHITE}${BC_BOLD}"
+  local C="${BC_CYAN}"
+  local M="${BC_MUTED}"
+  local R="${BC_RESET}"
 
   local _user _host _ip _date
   _user="$(id -un)"
@@ -105,14 +108,13 @@ _bc_banner() {
   _date="$(LC_TIME=en_US.UTF-8 date '+%A, %B %d, %Y' 2>/dev/null || LANG=C date '+%A, %B %d, %Y')"
 
   printf "\n"
-  printf "  ${B}██████╗ ${O}██╗      ██╗   ██╗███████╗${R} ${S} ██████╗  ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗${R}\n"
-  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔════╝${R} ${S}██╔════╝ ██╔═══██╗██╔══██╗██║████╗  ██║██╔════╝${R}\n"
-  printf "  ${B}██████╔╝${O}██║      ██║   ██║█████╗  ${R} ${S}██║      ██║   ██║██║  ██║██║██╔██╗ ██║██║  ███╗${R}\n"
-  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔══╝  ${R} ${S}██║      ██║   ██║██║  ██║██║██║╚██╗██║██║   ██║${R}\n"
-  printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R} ${S}╚██████╗ ╚██████╔╝██████╔╝██║██║ ╚████║╚██████╔╝${R}\n"
-  printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R} ${S} ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝${R}\n"
+  printf "  ${G1}████  ${G2}█     ${G3}█   █ █████  ${G4} ████  ███  ${G5}████  ███ ${G6}█   █  ███ ${R}\n"
+  printf "  ${G1}█   █ ${G2}█     ${G3}█   █ █      ${G4}█     █   █ ${G5}█   █  █  ${G6}██  █ █    ${R}\n"
+  printf "  ${G1}████  ${G2}█     ${G3}█   █ ████   ${G4}█     █   █ ${G5}█   █  █  ${G6}█ █ █ █  ██${R}\n"
+  printf "  ${G1}█   █ ${G2}█     ${G3}█   █ █      ${G4}█     █   █ ${G5}█   █  █  ${G6}█  ██ █   █${R}\n"
+  printf "  ${G1}████  ${G2}█████ ${G3} ███  █████  ${G4} ████  ███  ${G5}████  ███ ${G6}█   █  ████${R}\n"
   printf "\n"
-  printf "  ${C}Nearshore Software Development${R}  ${M}·  ${O}${_user}${M}@${C}${_host}${R}  ${M}·  ${_ip}${R}\n"
+  printf "  ${C}Nearshore Software Development${R}  ${M}·  ${G2}${_user}${M}@${C}${_host}${R}  ${M}·  ${_ip}${R}\n"
   printf "  ${M}${_date}  ·  bluecoding.com  ·  %s${R}\n" \
     "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && printf "true-color" || printf "256-color" )"
   printf "\n"
