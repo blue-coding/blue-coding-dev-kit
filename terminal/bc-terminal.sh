@@ -90,9 +90,9 @@ _bc_set_palette() {
 
 # ─── ASCII banner ─────────────────────────────────────────────────────────────
 _bc_banner() {
-  local W="$BC_WHITE$BC_BOLD"
   local B="$BC_BALTIC$BC_BOLD"
   local O="$BC_OCEAN$BC_BOLD"
+  local S="$BC_SAPPHIRE$BC_BOLD"
   local C="$BC_CYAN"
   local M="$BC_MUTED"
   local R="$BC_RESET"
@@ -105,14 +105,15 @@ _bc_banner() {
   _date="$(LC_TIME=en_US.UTF-8 date '+%A, %B %d, %Y' 2>/dev/null || LANG=C date '+%A, %B %d, %Y')"
 
   printf "\n"
-  printf "  ${B}██████╗ ${O}██╗      ██╗   ██╗███████╗${R}  ${W}CODING${R}\n"
-  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔════╝${R}  ${M}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${R}\n"
-  printf "  ${B}██████╔╝${O}██║      ██║   ██║█████╗  ${R}  ${C}Nearshore Software Development${R}\n"
-  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔══╝  ${R}  ${M}bluecoding.com${R}\n"
-  printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R}  ${O}${_user}${M}@${C}${_host}${R}\n"
-  printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R}  ${M}${_ip}${R}\n"
+  printf "  ${B}██████╗ ${O}██╗      ██╗   ██╗███████╗${R} ${S} ██████╗  ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗${R}\n"
+  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔════╝${R} ${S}██╔════╝ ██╔═══██╗██╔══██╗██║████╗  ██║██╔════╝${R}\n"
+  printf "  ${B}██████╔╝${O}██║      ██║   ██║█████╗  ${R} ${S}██║      ██║   ██║██║  ██║██║██╔██╗ ██║██║  ███╗${R}\n"
+  printf "  ${B}██╔══██╗${O}██║      ██║   ██║██╔══╝  ${R} ${S}██║      ██║   ██║██║  ██║██║██║╚██╗██║██║   ██║${R}\n"
+  printf "  ${B}██████╔╝${O}███████╗ ╚██████╔╝███████╗${R} ${S}╚██████╗ ╚██████╔╝██████╔╝██║██║ ╚████║╚██████╔╝${R}\n"
+  printf "  ${B}╚═════╝ ${O}╚══════╝  ╚═════╝ ╚══════╝${R} ${S} ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝${R}\n"
   printf "\n"
-  printf "  ${C}${_date}${R}  ${M}·  %s${R}\n" \
+  printf "  ${C}Nearshore Software Development${R}  ${M}·  ${O}${_user}${M}@${C}${_host}${R}  ${M}·  ${_ip}${R}\n"
+  printf "  ${M}${_date}  ·  bluecoding.com  ·  %s${R}\n" \
     "$( [[ ${BC_TRUECOLOR} -eq 1 ]] && printf "true-color" || printf "256-color" )"
   printf "\n"
 }
